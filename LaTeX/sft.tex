@@ -173,7 +173,7 @@ Lo schema circuitale dell'intero apparato strumentale: integratore e derivatore 
 \section{Ricostruzione di forme d'onda}
 \subsection{Onda quadra}
 Si è implementata in Python l'espressione dell'onda:
-\lstinputlisting[language=Python, firstline=52, lastline=60]{../fft.py}
+\lstinputlisting[language=Python, firstline=52, lastline=60]{../sft.py}
 Si può dimostrare che tutte le funzioni periodiche, che presentano discontinuità di primo tipo o "a scalino", una volta sviluppate tramite la serie di Fourier troncata ad un numero finito $\lambda$ di termini, presentano delle "sovraelongazioni" intorno ai punti di discontinuità, dove la somma parziale assume valori superiori alla funzione ricostruita. Questo è noto in letteratura come Fenomeno di Gibbs, da cui sappiamo che, anche nel limite in cui $\lambda \longrightarrow \infty$ la sovraelongazione della serie tende ad una quantità finita, ovvero è riducibile ma ultimamente ineliminabile. Nella nostra ricostruzione dunque valutiamo il numero di termini necessari per evitare errori sistematici introdotti da queste discontuinità studiando la differenza fra i valori dell'onda modello e di quella sviluppata con Fourier, come sempre facendo riferimento alla somma dei residui quadrati come indicatore della qualità di riproduzione.
 \begin{figure}[!htb]
 	\scalebox{0.55}{\input{./sqw100.pgf}}\hfill \scalebox{0.55}{\input{./sqw1k.pgf}}
@@ -201,12 +201,12 @@ B &= 166.81 \pm 0.05 \; \rm digit \\
 \fi
 \subsection{Onda triangolare}
 Si è implementata in Python l'espressione dell'onda: 
-\lstinputlisting[language=Python, firstline=62, lastline=70]{../fft.py}
-Da uno studio sulla qualità della forma d'onda analogo al caso precedente, si nota subito come il numero di termini necessari perché i residui quadrati dell'onda siano inferiori all'unità si ha già per $\lambda \leq 1000$, due ordini di grandezza in meno rispetto a prima. Questo è un ovvia conseguenza del fatto che, l'onda triangolare non è affetta dal fenomeno di Gibbs, in quanto priva di punti di discontinuità a salto.
+\lstinputlisting[language=Python, firstline=62, lastline=70]{../sft.py}
+Da uno studio sulla qualità della forma d'onda analogo al caso precedente, dalla figura \ref{plt:trg} si nota subito come il numero di termini necessari perché i residui quadrati dell'onda siano inferiori all'unità si ha già per $\lambda \leq 1000$, due ordini di grandezza in meno rispetto a prima. Questo è un ovvia conseguenza del fatto che, l'onda triangolare non è affetta dal fenomeno di Gibbs, in quanto priva di punti di discontinuità a salto.
 \begin{figure}[!htb]
 	\scalebox{0.55}{\input{./trg10.pgf}}\hfill \scalebox{0.55}{\input{./trg50.pgf}}
 	\scalebox{0.55}{\input{./trg100.pgf}}\hfill \scalebox{0.55}{\input{./trg1k.pgf}}
- 	\caption{Sviluppo in serie di Fourier per un’onda triangolare per $\lambda$ iterazioni confrontato con una stessa definita analiticamente da un if-else. L'asse dei tempi è sempre un array da 1000 punti equispaziati linearmente. \label{plt:sqw}}
+ 	\caption{Sviluppo in serie di Fourier per un’onda triangolare per $\lambda$ iterazioni confrontato con una stessa definita analiticamente da un if-else. L'asse dei tempi è sempre un array da 1000 punti equispaziati linearmente. \label{plt:trg}}
 \end{figure}
 \iffalse
 Mentre da un fit con modello a onda triangolare,
@@ -225,15 +225,15 @@ B &= 69.8 \pm 0.9 \; \rm mV \\
 \chi^2 &= 219001/6996 \\
 \text{abs\_sigma} &= \rm True
 \end{align*}
-\fi
 \begin{figure}[!htb]
 	\centering 
-% 		\scalebox{0.9}{\input{./ardtrg.pgf}}
- 	\caption{Fit triangolare della d.d.p nel tempo  all' uscita dell'integratore \label{plt:DSOtrg}}
+ 		\scalebox{0.9}{\input{./ardtrg.pgf}}
+ 	\caption{Fit triangolare della d.d.p nel tempo  all' uscita dell'integratore \label{plt:ardtrg}}
 \end{figure}
+\fi
 \subsection{Onda a pinna di squalo}
 Si è implementata in Python l'espressione dell'onda:
-\lstinputlisting[language=Python, firstline=72, lastline=84]{../fft.py}
+\lstinputlisting[language=Python, firstline=72, lastline=84]{../sft.py}
 Dunque per confrontare i risultati della simulazione con quanto osservato sperimentalmente otteniamo i parametri ottimali dell'onda da un fit per la "pinna di squalo" sugli stessi dati a cui verrà sovrapposta:\\
 \begin{align*}
 f &= 50.219 \pm 0.005 \; \rm Hz \\
@@ -270,8 +270,9 @@ B &= 212.17 \pm 0.07 \; \rm digit \qquad &B &= 179.29 \pm 0.13 \; \rm digit \\
 Si noti come i punti considerati "outliers", a più di 2.5 barre d'errore di distanza dal modello, si dispongano sempre alla stessa altezza nell'onda, come lungo una retta costante: in effetti su ogni periodo i punti attorno al valore $255 = 2^8 -1$ assumono andamento "a scalino" a seguito della digitalizzazione di Arduino. Questo si deve al difetto caratteristico degli ADC, per cui il sistema mostra una qualche "riluttanza" a far scattare il bit successivo (i.e. il nono) nella lettura della tensione. Dunque il test del $\chi^2$ potrà essere indice della bontà del fit solo una volta operata la rimozione di questi punti e altri (ove necessario) che si devono ad artefatti introdotti dal sistema di campionamento.
 \subsection{Serie di derivatore e integratore}
 Supponiamo trascurabili sia gli effetti delle resistenze interne dei componenti sia quelli di mismatch tra i sottocircuiti A e B collegati in cascata. Dal metodo simbolico sappiamo che gli effetti sulle armoniche in uscita da A andranno ad aggiungersi a quelli dovuti al derivatore B, per cui in uscita ci aspettiamo un'espressione del tipo:
-\lstinputlisting[language=Python, firstline=86, lastline=98]{../fft.py}
+\lstinputlisting[language=Python, firstline=86, lastline=98]{../sft.py}
 Dunque, come prima per confrontare i risultati della simulazione con quanto osservato sperimentalmente otteniamo i parametri ottimali dell'onda quadra da un fit sugli stessi dati a cui verrà sovrapposta:\\
+\iffalse
 \begin{align*}
 A &= 243.80 \pm 0.08 \; \rm mV \\
 B &= 70.49 \pm 0.16 \; \rm mV \\
@@ -292,6 +293,7 @@ T &= 21.9877 \pm 0.0006 \; \rm ms \\
 % 		\scalebox{0.9}{\input{./ardAB.pgf}}
  	\caption{Fit quadratico della d.d.p nel tempo da campionamento con oscilloscopio digitale \label{plt:DSOpar}}
 \end{figure}
+\fi
 \subsection{Accoppiamento AC dell'oscilloscopio}
 L’accoppiamento AC in ingresso all’oscilloscopio taglia la componente continua del segnale visualizzato mediante un condensatore di capacità $C_{\rm AC}$ in serie al segnale che, una volta carico, impedisce il passaggio di corrente. Assieme alla resistenza di ingresso dell’oscilloscopio (nel nostro caso $R_{\rm osc} = 1 \si{\mega\ohm}$ nominale\footnote{In realtà lo stadio di ingresso dell’oscilloscopio prevede il parallelo tra $R_{\rm osc}$ e un piccolo condensatore $C_{\rm osc} = 20 pF$ nominali per modellare capacità parassite dovute ai connettori e ai circuiti interni allo strumento. Dunque lo stadio di ingresso ha una impedenza di ingresso data da $Z_{\rm osc}= R_{\rm osc} + \frac{1}{j \omega C_{\rm osc}} $. I moduli delle impedenze dei due componenti in parallelo diventano comparabili per $\omega = 5 \times 10^4 \si{\radian\per\s}$. Perciò trascurare la presenza del condensatore $C_{\rm osc}$ è, a rigore, giustificato fintanto che la frequenza di lavoro è $f << 300 \; \si{\kilo\hertz}$}) tra segnale e linea di terra, il condensatore realizza un circuito derivatore RC/HPF. Di conseguenza in accoppiamento AC  forme d’onda quadre a bassa frequenza $\sim f_T = (2\pi R_{\rm osc}C_{\rm AC})^{-1}$, assumono la forma caratteristica dell'esponenziale di carica/scarica del condensatore. Dalle specifiche tecniche sappiamo che in AC l'oscilloscopio attenua le componenti del segnale sotto i $10$ Hz, per cui ci si aspetta $C_{\rm AC} \approx 4 \; \si{\nano\F}$. Questa distorsione può essere ricostruita con lo stesso metodo simbolico applicando attenuazione e sfasamento a un'onda quadra scritta in armoniche di Fourier. Nella figura \ref{plt:DSOAC} si simula la visualizzazione all’oscilloscopio di un’onda quadra di frequenza $f = 40$ Hz sottoposta all’azione di un filtro passa-alto con $f_T = 10$ Hz. 
 \begin{figure}[!htb]
