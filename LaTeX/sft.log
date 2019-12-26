@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.26)  26 DEC 2019 20:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.26)  26 DEC 2019 22:31
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1524,21 +1524,21 @@ Package thmtools Info: Key `qed' (with value `')
 ) (./sft.aux)
 \openout1 = `sft.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 46.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 47.
 
 (c:/texlive/2019/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1573,7 +1573,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \microtypecontext on input line 46.
+LaTeX Info: Redefining \microtypecontext on input line 47.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -1594,7 +1594,7 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box80
-Package hyperref Info: Link coloring ON on input line 46.
+Package hyperref Info: Link coloring ON on input line 47.
 
 (c:/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1604,9 +1604,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count365
 )
-LaTeX Info: Redefining \ref on input line 46.
-LaTeX Info: Redefining \pageref on input line 46.
-LaTeX Info: Redefining \nameref on input line 46.
+LaTeX Info: Redefining \ref on input line 47.
+LaTeX Info: Redefining \pageref on input line 47.
+LaTeX Info: Redefining \nameref on input line 47.
 
 (./sft.out) (./sft.out)
 \@outlinefile=\write4
@@ -1730,60 +1730,60 @@ File: siunitx-abbreviations.cfg 2017/11/26 v2.7k siunitx: Abbreviated units
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \it@ocap on input line 46.
-LaTeX Info: Redefining \it@ccap on input line 46.
+LaTeX Info: Redefining \it@ocap on input line 47.
+LaTeX Info: Redefining \it@ccap on input line 47.
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
 
 \c@lstlisting=\count366
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 46.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 47.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 46.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 47.
 
 (c:/texlive/2019/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 46.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 47.
 
 
 (c:/texlive/2019/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 46.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 47.
 
 
 (c:/texlive/2019/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 46.
+(Font)              <10> on input line 47.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7.6> on input line 46.
+(Font)              <7.6> on input line 47.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 46.
+(Font)              <6> on input line 47.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 46.
+(Font)              scaled to size 10.42007pt on input line 47.
 
 (c:/texlive/2019/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 46.
+(Font)              scaled to size 7.91925pt on input line 47.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 46.
+(Font)              scaled to size 6.25204pt on input line 47.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 46.
+(Font)              scaled to size 10.42007pt on input line 47.
 
 (c:/texlive/2019/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 46.
+(Font)              scaled to size 7.91925pt on input line 47.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 46.
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 46.
+(Font)              scaled to size 6.25204pt on input line 47.
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 47.
 
 
 (c:/texlive/2019/texmf-dist/tex/latex/psnfss/ot1zplm.fd
@@ -1793,7 +1793,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `zplm' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Try loading font information for OT1+lmss on input line 46.
+LaTeX Font Info:    Try loading font information for OT1+lmss on input line 47.
 
 
 (c:/texlive/2019/texmf-dist/tex/latex/lm/ot1lmss.fd
@@ -1803,7 +1803,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 46.
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 47.
 
 
 (c:/texlive/2019/texmf-dist/tex/latex/lm/ot1lmtt.fd
@@ -1814,56 +1814,56 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 47.
+(Font)              <12> on input line 48.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 47.
+(Font)              <9> on input line 48.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 47.
+(Font)              <7> on input line 48.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 47.
+(Font)              scaled to size 12.50409pt on input line 48.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 47.
+(Font)              scaled to size 9.37807pt on input line 48.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 47.
+(Font)              scaled to size 7.29405pt on input line 48.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 47.
+(Font)              scaled to size 12.50409pt on input line 48.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 47.
+(Font)              scaled to size 9.37807pt on input line 48.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 47.
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 47.
+(Font)              scaled to size 7.29405pt on input line 48.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 48.
 
 (c:/texlive/2019/texmf-dist/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 47.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 48.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 47.
+(Font)              <8> on input line 48.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 47.
+(Font)              <5> on input line 48.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 47.
+(Font)              scaled to size 8.33606pt on input line 48.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 47.
+(Font)              scaled to size 5.21004pt on input line 48.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 47.
+(Font)              scaled to size 8.33606pt on input line 48.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 47.
+(Font)              scaled to size 5.21004pt on input line 48.
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <6> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 47.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 48.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 49.
+(mdframed)              on input line 50.
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--53
+Underfull \hbox (badness 10000) in paragraph at lines 50--54
 
  []
 
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10'.
 (microtype)             Ignoring protrusion settings for this character.
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 61.
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 62.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -1908,7 +1908,7 @@ Package microtype Warning: Unknown slot number of character
 \realshift=\dimen350
 \realshift=\dimen351
 \realshift=\dimen352
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 110.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 111.
 
 (c:/texlive/2019/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1926,36 +1926,36 @@ Package microtype Info: Loading generic protrusion settings for font family
 \realshift=\dimen356
 \realshift=\dimen357
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 170.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 171.
 
 (c:/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/02/27 1.8b listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 176.
+nput line 177.
  (../sft.py
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 52.
 )
 (./figs/./sqw100.pgf) (./figs/./sqw1k.pgf) (./figs/./sqw10k.pgf)
 (./figs/./sqw100k.pgf)
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 179--182
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 180--183
 [][] []
  []
 
 
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 179--182
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 180--183
 [] [] 
  []
 
 (../sft.py) (./figs/./trg10.pgf) (./figs/./trg50.pgf) (./figs/./trg100.pgf)
 (./figs/./trg1k.pgf)
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 207--209
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 208--210
 [][] []
  []
 
 
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 207--209
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 208--210
 [] [] 
  []
 
@@ -1963,52 +1963,48 @@ Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/9'.
 (microtype)             Ignoring protrusion settings for this character.
 [2] (../sft.py)
-Underfull \hbox (badness 10000) in paragraph at lines 237--238
+Underfull \hbox (badness 10000) in paragraph at lines 238--239
 
  []
 
 [3] (./figs/./ardfin.pgf) [4] (./figs/./ardfin70.pgf) (./figs/./ardfin170.pgf)
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 267--268
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 268--269
 [][] [] 
  []
 
 [5] (../sft.py)
-Underfull \hbox (badness 10000) in paragraph at lines 274--297
+Underfull \hbox (badness 10000) in paragraph at lines 275--298
 
  []
 
-<./figs/./DSOAC.pdf, id=127, 462.52798pt x 346.89601pt>
+<./figs/./DSOAC.pdf, id=129, 462.52798pt x 346.89601pt>
 File: ./figs/./DSOAC.pdf Graphic file (type pdf)
 <use ./figs/./DSOAC.pdf>
-Package pdftex.def Info: ./figs/./DSOAC.pdf  used on input line 301.
+Package pdftex.def Info: ./figs/./DSOAC.pdf  used on input line 302.
 (pdftex.def)             Requested size: 416.27133pt x 312.20352pt.
 [6]
-<./figs/./AC_out.pdf, id=153, 462.52798pt x 346.89601pt>
+<./figs/./AC_out.pdf, id=155, 462.52798pt x 346.89601pt>
 File: ./figs/./AC_out.pdf Graphic file (type pdf)
 <use ./figs/./AC_out.pdf>
-Package pdftex.def Info: ./figs/./AC_out.pdf  used on input line 331.
+Package pdftex.def Info: ./figs/./AC_out.pdf  used on input line 325.
 (pdftex.def)             Requested size: 416.27133pt x 312.20352pt.
- [7 <./figs/./DSOAC.pdf>] (./figs/./gain5+.pgf) (./sft.bbl) [8 <./figs/./AC_out
+ (./figs/./gain5+.pgf) [7 <./figs/./DSOAC.pdf>] (./sft.bbl) [8 <./figs/./AC_out
 .pdf>] [9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 346.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 346.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 358.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 358.
  (./sft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 346.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 346.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 358.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 358.
 Package rerunfilecheck Info: File `sft.out' has not changed.
 (rerunfilecheck)             Checksum: A3CE25CCB15761BF03F1C5F9D013C3FF;588.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 346.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 358.
  ) 
 Here is how much of TeX's memory you used:
- 62845 strings out of 492609
- 1487411 string characters out of 6132817
- 6486309 words of memory out of 7999999
- 65658 multiletter control sequences out of 15000+600000
- 741302 words of font info for 272 fonts, out of 8000000 for 9000
+ 62878 strings out of 492609
+ 1488154 string characters out of 6132817
+ 6486848 words of memory out of 7999999
+ 65682 multiletter control sequences out of 15000+600000
+ 741634 words of font info for 276 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  73i,23n,127p,1889b,1311s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/texlive/2019/tex
@@ -2040,10 +2036,10 @@ fb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/texlive/2019
 ype1/public/lm/lmsy9.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtk
 10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/texlive
 /2019/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on sft.pdf (9 pages, 1342805 bytes).
+Output written on sft.pdf (9 pages, 1345575 bytes).
 PDF statistics:
- 348 PDF objects out of 1000 (max. 8388607)
- 284 compressed objects within 3 object streams
- 74 named destinations out of 1000 (max. 500000)
+ 353 PDF objects out of 1000 (max. 8388607)
+ 289 compressed objects within 3 object streams
+ 75 named destinations out of 1000 (max. 500000)
  75351 words of extra memory for PDF output out of 89155 (max. 10000000)
 

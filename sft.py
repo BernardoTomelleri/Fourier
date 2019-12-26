@@ -106,9 +106,9 @@ def chitest(y, dy, model, ddof=0):
     return chisq, ndof, sigma    
 
 # Variabili di controllo dei grafici in ordine decrescente di pesantezza
-log=False
+log=True
 tex=True
-tick=False
+tick=True
 DSO = False
 # Impostazioni opzionali per tipografia in LaTeX
 if tex:

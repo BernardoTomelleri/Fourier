@@ -27,4 +27,10 @@ I.~D.~I. Ivrea \emph{et~al.} Arduino: Open-source electronic prototyping
   platform. Ivrea, Italy. [Online]. Available: \url{https://www.arduino.cc/}
 \BIBentrySTDinterwordspacing
 
+\bibitem{gibbs}
+{Wikipedia contributors}. (2019) Gibbs phenomenon --- {Wikipedia}{,} the free
+  encyclopedia.
+  \url{https://en.wikipedia.org/w/index.php?title=Gibbs_phenomenon&oldid=931444514}.
+  [Online; accessed 26-December-2019].
+
 \end{thebibliography}

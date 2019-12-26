@@ -20,6 +20,7 @@
 \usepackage{titling}
 \usepackage{listings}
 \usepackage{lmodern}
+\usepackage{url}
 \usepgfplotslibrary{external} 
 \tikzexternalize
 
@@ -174,7 +175,7 @@ Lo schema circuitale dell'intero apparato strumentale: integratore e derivatore 
 \subsection{Onda quadra}
 Si è implementata in Python l'espressione dell'onda:
 \lstinputlisting[language=Python, firstline=52, lastline=60]{../sft.py}
-Si può dimostrare che tutte le funzioni periodiche, che presentano discontinuità di primo tipo o "a scalino", una volta sviluppate tramite la serie di Fourier troncata ad un numero finito $\lambda$ di termini, presentano delle "sovraelongazioni" intorno ai punti di discontinuità, dove la somma parziale assume valori superiori alla funzione ricostruita. Questo è noto in letteratura come Fenomeno di Gibbs, da cui sappiamo che, anche nel limite in cui $\lambda \longrightarrow \infty$ la sovraelongazione della serie tende ad una quantità finita, ovvero è riducibile ma ultimamente ineliminabile. Nella nostra ricostruzione dunque valutiamo il numero di termini necessari per evitare errori sistematici introdotti da queste discontuinità studiando la differenza fra i valori dell'onda modello e di quella sviluppata con Fourier, come sempre facendo riferimento alla somma dei residui quadrati come indicatore della qualità di riproduzione.
+Si può dimostrare che tutte le funzioni periodiche, che presentano discontinuità di primo tipo o "a scalino", una volta sviluppate tramite la serie di Fourier troncata ad un numero finito $\lambda$ di termini, presentano delle "sovraelongazioni" intorno ai punti di discontinuità, dove la somma parziale assume valori superiori alla funzione ricostruita. Questo è noto in letteratura come Fenomeno di Gibbs\cite{gibbs}, da cui sappiamo che, anche nel limite in cui $\lambda \longrightarrow \infty$ la sovraelongazione della serie tende ad una quantità finita, ovvero è riducibile ma ultimamente ineliminabile. Nella nostra ricostruzione dunque valutiamo il numero di termini necessari per evitare errori sistematici introdotti da queste discontuinità studiando la differenza fra i valori dell'onda modello e di quella sviluppata con Fourier, come sempre facendo riferimento alla somma dei residui quadrati come indicatore della qualità di riproduzione.
 \begin{figure}[!htb]
 	\scalebox{0.55}{\input{./sqw100.pgf}}\hfill \scalebox{0.55}{\input{./sqw1k.pgf}}
 	\scalebox{0.55}{\input{./sqw10k.pgf}}\hfill \scalebox{0.55}{\input{./sqw100k.pgf}}
@@ -309,20 +310,13 @@ B &= 17.8 \pm 1.2 \; \rm mV \\
 \phi &= 1996.7 \pm 0.2 \; \mathrm{m}\; \pi \si{\radian} \\
 f_{\rm TA} &= 8.69 \pm 0.01 \; \rm Hz \\
 f_{\rm TB} &= 2.99 \pm 0.04 \; \si{\kilo\hertz} \\
-\sigma_{f, A} &= 0.22 \\   
-\sigma_{f, B} &= -0.04 \\
-\sigma_{f, \phi} &= -0.92 \\
-\sigma_{f, f_{\rm TA}} &= -0.01 \\
-\sigma_{f, f_{\rm TB}} &= 0.23 \\
-\sigma_{A, B} &= 0.004 \\
-\sigma_{A, \phi} &= -0.37 \\
-\sigma_{A, f_{\rm TA}} &= -0.26 \\
-\sigma_{A, f_{\rm TB}} &= 0.99 \\
-\sigma_{B, \phi} &= 10^-4 \\
-\sigma_{B, f_{\rm TA}} &= 0.03 \\
-\sigma_{\phi, f_{\rm TA}} &= 0.01 \\
-\sigma_{\phi, f_{\rm TB}} &= -0.37 \\
-\sigma_{f_{\rm TA}, f_{\rm TB}} &= -0.17 \\
+\sigma_{f, A} &= 0.22 \qquad &\sigma_{A, B} &= 0.004 \\
+\sigma_{f, B} &= -0.04 \qquad &\sigma_{A, \phi} &= -0.37 \\
+\sigma_{f, \phi} &= -0.92 \qquad &\sigma_{A, f_{\rm TA}} &= -0.26 \\
+\sigma_{f, f_{\rm TA}} &= -0.01 \qquad &\sigma_{A, f_{\rm TB}} &= 0.99 \\
+\sigma_{f, f_{\rm TB}} &= 0.23 \qquad &\sigma_{B, \phi} &= 10^-4 \\
+\sigma_{B, f_{\rm TA}} &= 0.03 \qquad &\sigma_{\phi, f_{\rm TA}} &= 0.01 \\
+\sigma_{\phi, f_{\rm TB}} &= -0.37 \qquad &\sigma_{f_{\rm TA}, f_{\rm TB}} &= -0.17 \\
 \chi^2 &= 6483/6060 \\
 \text{abs\_sigma} &= \rm False
 \end{align*}
@@ -332,6 +326,24 @@ f_{\rm TB} &= 2.99 \pm 0.04 \; \si{\kilo\hertz} \\
  	\caption{Fit dell'onda quadra distorta in accoppiamento AC con rimozione degli outlier \label{plt:AC_out}}
 \end{figure}
 \section{Simulazione dell'attenuazione in risposta di un circuito RC}
+Si è misurato il guadagno $A(f)$ per l’integratore A ed il derivatore B,
+calcolando il rapporto tra le ampiezze segnale in uscita e di quello in
+ingresso al circuito, entrambi monitorati con i due canali dell’oscilloscopio.
+Supponiamo che questo, per merito della sua alta resistenza in ingresso,
+perturbi in maniera trascurabile il sistema e che altrettanto trascurabili
+siano gli effetti dovuti alla resistenza in uscita dal generatore di funzioni
+($r_{\rm G} = 50 \; \Omega$ nominali). Dunque si è simulato lo stesso guadagno
+sulle onde quadre ricostruite numericamente per 400 valori della frequenza di
+lavoro $f$: Supponendo un'ampiezza picco-picco unitaria in ingresso, si è
+dedotta l'ampiezza in uscita come differenza tra valore massimo e minimo della serie.
+Dalla figura \ref{plt:gain} si vede come il comportamento sperimentale sia
+diverso dalle previsioni per il caso sinusoidale (linea tratteggiata grigia)
+e anche come esso sia, almeno per frequenze entro i $10^4$ Hz,
+qualitativamente ben riprodotto dalla simulazione.
+Si vede anche come, per frequenze più alte, i punti si discostano dall'
+andamento atteso, a causa di capacità parassite che cessano di essere
+trascurabili, al contrario di quanto presuppone il nostro modello,
+dunque la simulazione.
 \begin{figure}[!htb]
 	\centering 
  		\scalebox{0.9}{\input{./gain5+.pgf}}
