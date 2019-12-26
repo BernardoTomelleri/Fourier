@@ -7,7 +7,7 @@ individuabile nel vostro sistema da riga di comando tramite:\
 kpsewhich -a texmf.cnf
 Aggiungendo le opzioni:\
 main_memory = 10000000\
-save_size  = 10000000
+save_size  = 10000000\
 sotto a\
 OSFONTDIR = $SystemRoot/fonts// \
 (Valori totalmente arbitrari, di default 5000000)\
