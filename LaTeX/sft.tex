@@ -1,0 +1,349 @@
+\documentclass{article}[a4paper, oneside ,11pt]
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{calc}
+\usepackage{amsmath,amssymb,amsthm, thmtools, amsfonts}
+\usepackage[nochapters,pdfspacing]{classicthesis}
+%\usepackage{hyperref}% clashes with classicthesis
+\usepackage{cleveref}
+\usepackage[siunitx]{circuitikz}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage{siunitx}
+\usepackage[italian]{babel}
+\usepackage{pgfplots}
+\usepackage{titling}
+\usepackage{listings}
+\usepackage{lmodern}
+\usepgfplotslibrary{external} 
+\tikzexternalize
+
+\pgfplotsset{compat=1.16}
+\lstset{
+basicstyle=\ttfamily,
+columns=fullflexible,
+keepspaces=true,
+}
+\mdfsetup{linewidth=0.6pt}
+\graphicspath{{./figs/}}
+\makeatletter
+\def\input@path{{./figs/}}
+%or: \def\input@path{{/path/to/folder/}{/path/to/other/folder/}}
+\makeatother
+
+\input{../../Template/math}
+
+\geometry{a4paper, left=20mm, right=20mm, top=20mm, bottom=20mm}
+\title{Simulazione numerica di un circuito Integratore/Derivatore RC}
+\author{L. Pettinari(\thanks{Dipartimento di Fisica E. Fermi, Universit\`a di Pisa - Pisa, Italy} ) \and B. Tomelleri(\protect\footnotemark[1] ) \and N. Valori(\protect\footnotemark[1] )}
+\date{2019/12/21}
+
+\begin{document}
+\maketitle
+\begin{mdframed}
+\textbf{Riassunto:} --- Tramite la piattaforma di sviluppo Arduino\cite{arduino} confrontiamo campionamenti digitali con simulazioni numeriche, basate sull'analisi di Fourier, di segnali in uscita da circuiti integratori/derivatori RC. Discutiamo la struttura di base e i comportamenti attesi del sistema e ne illustriamo il funzionamento con qualche esempio pratico.\\\\
+PACS 01.40.-d – Education.\\
+PACS 01.50.Pa – Laboratory experiments and apparatus.\\
+PACS 07.05.Hd – Data acquisition: hardware and software.
+\end{mdframed}
+\section{Campionamento digitale di segnali}
+In questa sezione descriviamo il metodo e gli strumenti impiegati nella misura dei segnali elettrici.
+Si sono costruiti due circuiti RC, un integratore o filtro passa-basso (LPF) e un derivatore o filtro passa-alto (HPF) che indichiamo rispettivamente come circuiti A e B. Prendiamo il valore nominale come riferimento per la capacità e misuriamo con un multimetro digitale le resistenze di entrambi i circuiti, da cui si trova:
+\begin{align*}
+R_A &= 6.72 \pm 0.05 \; \si{\kilo\ohm}\\
+C_A &= 2.2 \pm 10\% \; \si{\micro\F}\\
+f_{\rm TA} &= \frac{1}{2 \pi R_A C_A} = 11 \pm 1 \; \si{\hertz}
+\end{align*}
+\begin{align*}
+R_B &= 67.5 \pm 0.6 \; \si{\ohm}\\
+C_B &= 0.2 \pm 10\% \; \si{\micro\F}\\
+f_{\rm TB} &= \frac{1}{2 \pi R_B C_B} = 12 \pm 1 \; \si{\kilo\hertz}
+\end{align*}
+I due circuiti non sono indipendenti, quando questi vengono collegati in cascata i condensatori si trovano in parallelo, dunque possiamo definire una capacità efficace per il circuito A+B
+\begin{align*}
+C_{\rm eff} &= C_A + C_B = 2.4 \pm 10\% \; \si{\micro\F}\\
+f_{\rm TA} &= \frac{1}{2 \pi R_A C_{\rm eff}} = 10 \pm 1 \; \si{\hertz}
+\end{align*}
+Lo schema dei circuiti RC dell'integratore A e del derivatore B:
+\begin{center}
+\begin{circuitikz}
+\draw (0,0)
+	to[sqV] (0,1.5) % The current source
+	to [R = $r_{\rm G}$] (0,3)
+	to[R = $R_A$, *-*] (3,3)
+	to[C= $C_A$, -*] (3,0)
+	to[short] (0,0);
+\draw (0,3)
+	to[short, f>^=$\text{CH1}_{\rm osc} \;V_{\rm in}$] (0,4.5)
+	node[oscopeshape] {};	
+\draw (3,0)
+	node[eground]{};
+\draw (3,3)
+	to[short, f>_=$\text{CH1}_{\rm osc} \; V_A$] (3,4.5)
+	node[oscopeshape] {};
+\node at (1.5,1) [label=\large A] {};
+\end{circuitikz}
+\qquad\quad
+\begin{circuitikz}
+\draw (0,0)
+	to[sqV] (0,1.5) % The current source
+	to [R = $r_{\rm G}$] (0,3)
+	to[C = $C_B$, *-*] (3,3)
+	to[R = $R_B$,*-*] (3,0)
+	to[short] (0,0);
+\draw (0,3)
+	to[short, f>^=$\text{CH1}_{\rm osc} \;V_{\rm in}$] (0,4.5)
+	node[oscopeshape] {};	
+\draw (3,0)
+	node[eground]{};
+\draw (3,3)
+	to[short, f>_=$\text{CH2}_{\rm osc} \; V_B$] (3,4.5)
+	node[oscopeshape] {};
+\node at (1.5,1) [label=\large B] {};
+\end{circuitikz}
+\end{center}
+Lo schema circuitale dell'intero apparato strumentale: integratore e derivatore in cascata da cui i segnali in uscita sono campionati dalla porta analogica \texttt{A0} di Arduino e monitorate dai canali di un oscilloscopio.
+\begin{center}
+\begin{circuitikz}[scale = 0.1]
+\draw (-90,0)
+	to[sqV] (-90,15) % The current source
+	to [R = $r_{\rm G}$] (-90,30)
+	to[R = $R_A$, *-*] (-60,30)
+	to[C, l_=$C_A$, -*] (-60,0)
+	to[short] (-90,0);
+\draw (-90,30)
+	to[short, f>^=$V_{\rm in}$] (-90,45)
+	node[oscopeshape] {};	
+\draw (-90, 35) to [short, o-] (-90, 45);
+\draw (-60,-4)
+	node[eground]{};
+\draw (-60,0)--(-60, -4)--(28, -4)--(28,0);
+	\draw (-60,30)
+	to[short, f>^=$V_A$] (-60,45)
+	node[oscopeshape] {CH1$_{\rm osc}$};
+\draw (-60, 35) to [short, o-] (-60, 45);
+\draw (-60,30)
+	to[C, l=$C_B$, -*] (-30,30)
+	to[R, l_=$R_B$] (-30,0)
+	to[short] (-60,0);
+\draw (-30,30)
+	to[short, f=$V_B$] (-30,45)
+	node[oscopeshape] {CH2$_{\rm osc}$};
+\draw (-30,35)
+	to [short, *-] (-22,35)--(-22,0)
+	to [xing](-22,-8)--(40,-8)--(40,0);
+\coordinate (A) at (-10,0);
+\draw[very thick, blue] (A)--(59.1,0)-|(59.1,2.5)--++(45:2.5)--++(90:30)--++(135:2.5)--++(90:16)--++(180:59.1)--(-10, 52)--cycle;
+\filldraw[very thick,black!70](-13,3) rectangle (-1,11);
+\filldraw[very thick,gray!40](-15.5,32) rectangle (-3.5,42);
+\filldraw[very thick,gray](18,16) rectangle (56,23);
+\foreach \x/\t in {1/AREF,4/GND}{
+\node (\t) at (\x,52) [draw,minimum width=3mm,minimum height=3mm]{};
+\node at (\x,52) [xshift=-2.5mm,below=8mm,rotate=90]{$\text{\t}$};}
+\foreach \x/\t in {13/11,16/10,19/9}{
+\node (\t) at (\x,52) [draw,minimum width=3mm,minimum height=3mm]{};
+\node at (\x,52) [xshift=-2.5mm,below=7mm,rotate=90]{$\sim \t$};}
+\foreach \x/\n in {7/13,10/12,22/8,28/7,37/4,43/2}{
+\node (\n) at (\x,52) [draw,minimum width=3mm,minimum height=3mm]{};
+\node at (\x,52) [xshift=-2.5mm,below=5mm,rotate=90] {$\n$};}
+\foreach \x/\n in {31/6,34/5,40/3}{
+\node (\n) at (\x,52) [draw,minimum width=3mm,minimum height=3mm]{};
+\node at (\x,52) [xshift=-2.5mm,below=7mm,rotate=90] {$\sim \n$};}
+\foreach \x/\n in {46/TX -> 1, 49/RX <- 0, 52/SCL, 55/SDA}{
+\node (\n) at (\x,52) [draw,minimum width=3mm,minimum height=3mm]{};
+\node at (\x,52) [xshift=-2.5mm,below=1cm,rotate=90] {\n};}
+\foreach \x/\t in {16/IOREF,19/RESET,22/3V3,25/5V,28/GND1,31/GND2,34/VIN}{
+\node (\t) at (\x,3mm) [draw,minimum width=3mm,minimum height=3mm]{};
+\node at (\x,5mm) [xshift=2.5mm,above=8mm,rotate=90]{$\text{\t}$};}
+\foreach \x/\n in {40/A0,43/A1,46/A2,49/A3,52/A4,55/A5}{
+\node (\n) at (\x,3mm) [draw,minimum width=3mm,minimum height=3mm]{};
+\node at (\x,3mm) [xshift=2.5mm,above=5mm,rotate=90]{\n};}
+\node at (-9,33) [label={\textbf{USB}}] {};
+\node at (-7,3) [label={\textbf{Serial}}] {};
+\node at (46,7) [label={\textbf{Analog In}}] {};
+\node at (23,32) [label={\textbf{Digital I/O (PWM$=\sim$)}}] {};
+\node at (25,24) [label={\Large \textbf{\texttt{{ARDUINO}}}}] {};
+\end{circuitikz}
+\end{center}
+\section{Ricostruzione di forme d'onda}
+\subsection{Onda quadra}
+Si è implementata in Python l'espressione dell'onda:
+\lstinputlisting[language=Python, firstline=52, lastline=60]{../fft.py}
+Si può dimostrare che tutte le funzioni periodiche, che presentano discontinuità di primo tipo o "a scalino", una volta sviluppate tramite la serie di Fourier troncata ad un numero finito $\lambda$ di termini, presentano delle "sovraelongazioni" intorno ai punti di discontinuità, dove la somma parziale assume valori superiori alla funzione ricostruita. Questo è noto in letteratura come Fenomeno di Gibbs, da cui sappiamo che, anche nel limite in cui $\lambda \longrightarrow \infty$ la sovraelongazione della serie tende ad una quantità finita, ovvero è riducibile ma ultimamente ineliminabile. Nella nostra ricostruzione dunque valutiamo il numero di termini necessari per evitare errori sistematici introdotti da queste discontuinità studiando la differenza fra i valori dell'onda modello e di quella sviluppata con Fourier, come sempre facendo riferimento alla somma dei residui quadrati come indicatore della qualità di riproduzione.
+\begin{figure}[!htb]
+	\scalebox{0.55}{\input{./sqw100.pgf}}\hfill \scalebox{0.55}{\input{./sqw1k.pgf}}
+	\scalebox{0.55}{\input{./sqw10k.pgf}}\hfill \scalebox{0.55}{\input{./sqw100k.pgf}}
+ 	\caption{Sviluppo in serie di Fourier per un’onda quadra per $\lambda$ iterazioni confrontato con un onda quadra definita analiticamente da un if-else. L'asse dei tempi è sempre un array da 1000 punti equispaziati linearmente.
+ \label{plt:sqw}}
+\end{figure}
+\iffalse
+A partire da una serie di punti campionati con Arduino di un onda quadra in uscita dal generatore di funzioni
+Lasciando liberi tutti i parametri $A$, $\omega$, $\phi$ e $B$ si ottengono i valori:
+\begin{align*}
+A &= 67.68 \pm 0.07 \; \rm digit \\
+B &= 166.81 \pm 0.05 \; \rm digit \\
+\omega &= 315.459 \pm 0.021 \; \rm rad/s \\  
+\phi &= 217.6 \pm 2.2 \; \rm m rad \\
+\sigma_{f, A} &= 0.02 \\   
+\sigma_{f, B} &= -0.02 \\
+\sigma_{f, \phi} &= -0.006 \\
+\sigma_{A, B} &= -0.87 \\
+\sigma_{A, \phi} &= -0.04 \\   
+\sigma_{B, \phi} &= 0.03 \\
+\chi^2 &= 1677.3/1513 \quad [+ 3 \sigma] \\
+\text{abs\_sigma} &= \rm True
+\end{align*}
+\fi
+\subsection{Onda triangolare}
+Si è implementata in Python l'espressione dell'onda: 
+\lstinputlisting[language=Python, firstline=62, lastline=70]{../fft.py}
+Da uno studio sulla qualità della forma d'onda analogo al caso precedente, si nota subito come il numero di termini necessari perché i residui quadrati dell'onda siano inferiori all'unità si ha già per $\lambda \leq 1000$, due ordini di grandezza in meno rispetto a prima. Questo è un ovvia conseguenza del fatto che, l'onda triangolare non è affetta dal fenomeno di Gibbs, in quanto priva di punti di discontinuità a salto.
+\begin{figure}[!htb]
+	\scalebox{0.55}{\input{./trg10.pgf}}\hfill \scalebox{0.55}{\input{./trg50.pgf}}
+	\scalebox{0.55}{\input{./trg100.pgf}}\hfill \scalebox{0.55}{\input{./trg1k.pgf}}
+ 	\caption{Sviluppo in serie di Fourier per un’onda triangolare per $\lambda$ iterazioni confrontato con una stessa definita analiticamente da un if-else. L'asse dei tempi è sempre un array da 1000 punti equispaziati linearmente. \label{plt:sqw}}
+\end{figure}
+\iffalse
+Mentre da un fit con modello a onda triangolare,
+ovvero supponendo che il circuito abbia agito più come un filtro che da integratore sul segnale $V_{\rm in}$ si trova, lasciando tutti i parametri liberi:
+\begin{align*}
+A &= 836.8 \pm 1.5 \; \rm mV \\
+B &= 69.8 \pm 0.9 \; \rm mV \\
+\omega &= 285.68 \pm 0.04 \; \rm rad/s \\  
+\phi &= 162.4 \pm 1.8 \; \rm m rad \\
+\sigma_{f, A} &= 0.03 \\   
+\sigma_{f, B} &= -0.02 \\
+\sigma_{f, \phi} &= 0.06 \\
+\sigma_{A, B} &= -0.44 \\
+\sigma_{A, \phi} &= 0.03 \\   
+\sigma_{B, \phi} &= 0.003 \\
+\chi^2 &= 219001/6996 \\
+\text{abs\_sigma} &= \rm True
+\end{align*}
+\fi
+\begin{figure}[!htb]
+	\centering 
+% 		\scalebox{0.9}{\input{./ardtrg.pgf}}
+ 	\caption{Fit triangolare della d.d.p nel tempo  all' uscita dell'integratore \label{plt:DSOtrg}}
+\end{figure}
+\subsection{Onda a pinna di squalo}
+Si è implementata in Python l'espressione dell'onda:
+\lstinputlisting[language=Python, firstline=72, lastline=84]{../fft.py}
+Dunque per confrontare i risultati della simulazione con quanto osservato sperimentalmente otteniamo i parametri ottimali dell'onda da un fit per la "pinna di squalo" sugli stessi dati a cui verrà sovrapposta:\\
+\begin{align*}
+f &= 50.219 \pm 0.005 \; \rm Hz \\
+A &= 727.8 \pm 0.7 \; \rm digit \\
+B &= 159.11 \pm 0.07 \; \rm digit \\
+\phi &= 1000.6 \pm 0.5 \; \mathrm{m}\; \pi \si{\radian} \\
+\sigma_{f, A} &= 0.01 \\   
+\sigma_{f, B} &= -0.16 \\
+\sigma_{f, \phi} &= -0.86 \\
+\sigma_{A, B} &= -0.01 \\
+\sigma_{A, \phi} &= -0.007 \\   
+\sigma_{B, \phi} &= 0.14 \\
+\chi^2 &= 2339/881 \\
+\text{abs\_sigma} &= \rm True
+\end{align*}
+\begin{figure}[!htb]
+	\centering 
+ 		\scalebox{0.9}{\input{./ardfin.pgf}}
+ 	\caption{Sovrapposizione dei campionamenti di Arduino con la ricostruzione della pinna di squalo \label{plt:ardfin}}
+\end{figure}
+Cambiando i parametri a piacere, ma fissando lo stesso intervallo nei tempi, dalla figura \ref{plt:fins} si vede come la pinna di squalo ricostruita con il metodo simbolico continui a descrivere -bene- i dati sperimentali:
+\begin{align*}
+f &= 69.626 \pm 0.008 \; \rm Hz  \qquad &f &= 169.958 \pm 0.009 \; \rm Hz \\
+A &= 591.7 \pm 1.0 \; \rm digit \qquad &A &= 289.9 \pm 0.3 \; \rm digit \\
+B &= 212.17 \pm 0.07 \; \rm digit \qquad &B &= 179.29 \pm 0.13 \; \rm digit \\
+\phi &= 1039.6 \pm 0.9 \; \mathrm{m}\; \pi \si{\radian} \qquad &\phi &= 968.2 \pm 0.6 \; \mathrm{m}\; \pi \si{\radian} \\
+\chi^2 &= 4253/882 \qquad &\chi^2 &= 893/252 \\
+\text{abs\_sigma} &= \rm True \qquad &\text{abs\_sigma} &= \rm True
+\end{align*}
+\begin{figure}[!htb]
+	\scalebox{0.55}{\input{./ardfin70.pgf}}\hfill \scalebox{0.55}{\input{./ardfin170.pgf}}
+ 	\caption{Sovrapposizione dei campionamenti di Arduino con la ricostruzione della pinna di squalo per due altre frequenze, $f_1 = 70 \; \si{\hertz}$ e $f_2 = 170 \; \si{\hertz}$. \label{plt:fins}}
+\end{figure}
+Si noti come i punti considerati "outliers", a più di 2.5 barre d'errore di distanza dal modello, si dispongano sempre alla stessa altezza nell'onda, come lungo una retta costante: in effetti su ogni periodo i punti attorno al valore $255 = 2^8 -1$ assumono andamento "a scalino" a seguito della digitalizzazione di Arduino. Questo si deve al difetto caratteristico degli ADC, per cui il sistema mostra una qualche "riluttanza" a far scattare il bit successivo (i.e. il nono) nella lettura della tensione. Dunque il test del $\chi^2$ potrà essere indice della bontà del fit solo una volta operata la rimozione di questi punti e altri (ove necessario) che si devono ad artefatti introdotti dal sistema di campionamento.
+\subsection{Serie di derivatore e integratore}
+Supponiamo trascurabili sia gli effetti delle resistenze interne dei componenti sia quelli di mismatch tra i sottocircuiti A e B collegati in cascata. Dal metodo simbolico sappiamo che gli effetti sulle armoniche in uscita da A andranno ad aggiungersi a quelli dovuti al derivatore B, per cui in uscita ci aspettiamo un'espressione del tipo:
+\lstinputlisting[language=Python, firstline=86, lastline=98]{../fft.py}
+Dunque, come prima per confrontare i risultati della simulazione con quanto osservato sperimentalmente otteniamo i parametri ottimali dell'onda quadra da un fit sugli stessi dati a cui verrà sovrapposta:\\
+\begin{align*}
+A &= 243.80 \pm 0.08 \; \rm mV \\
+B &= 70.49 \pm 0.16 \; \rm mV \\
+T &= 21.9877 \pm 0.0006 \; \rm ms \\
+\omega &= 285.756 \pm 0.008 \; \rm rad/s \\  
+\phi &= 6021.5 \pm 1.3 \; \rm m rad \\
+\sigma_{f, A} &= -0.11 \\   
+\sigma_{f, B} &= 0.53 \\
+\sigma_{f, \phi} &= -0.04 \\ 
+\sigma_{A, B} &= 0.06 \\
+\sigma_{A, \phi} &= 0.07 \\  
+\sigma_{B, \phi} &= -0.0009 \\
+\chi^2 &= 7341.6/6696 \\
+\text{abs\_sigma} &= \rm True
+\end{align*}
+\begin{figure}[!htb]
+	\centering 
+% 		\scalebox{0.9}{\input{./ardAB.pgf}}
+ 	\caption{Fit quadratico della d.d.p nel tempo da campionamento con oscilloscopio digitale \label{plt:DSOpar}}
+\end{figure}
+\subsection{Accoppiamento AC dell'oscilloscopio}
+L’accoppiamento AC in ingresso all’oscilloscopio taglia la componente continua del segnale visualizzato mediante un condensatore di capacità $C_{\rm AC}$ in serie al segnale che, una volta carico, impedisce il passaggio di corrente. Assieme alla resistenza di ingresso dell’oscilloscopio (nel nostro caso $R_{\rm osc} = 1 \si{\mega\ohm}$ nominale\footnote{In realtà lo stadio di ingresso dell’oscilloscopio prevede il parallelo tra $R_{\rm osc}$ e un piccolo condensatore $C_{\rm osc} = 20 pF$ nominali per modellare capacità parassite dovute ai connettori e ai circuiti interni allo strumento. Dunque lo stadio di ingresso ha una impedenza di ingresso data da $Z_{\rm osc}= R_{\rm osc} + \frac{1}{j \omega C_{\rm osc}} $. I moduli delle impedenze dei due componenti in parallelo diventano comparabili per $\omega = 5 \times 10^4 \si{\radian\per\s}$. Perciò trascurare la presenza del condensatore $C_{\rm osc}$ è, a rigore, giustificato fintanto che la frequenza di lavoro è $f << 300 \; \si{\kilo\hertz}$}) tra segnale e linea di terra, il condensatore realizza un circuito derivatore RC/HPF. Di conseguenza in accoppiamento AC  forme d’onda quadre a bassa frequenza $\sim f_T = (2\pi R_{\rm osc}C_{\rm AC})^{-1}$, assumono la forma caratteristica dell'esponenziale di carica/scarica del condensatore. Dalle specifiche tecniche sappiamo che in AC l'oscilloscopio attenua le componenti del segnale sotto i $10$ Hz, per cui ci si aspetta $C_{\rm AC} \approx 4 \; \si{\nano\F}$. Questa distorsione può essere ricostruita con lo stesso metodo simbolico applicando attenuazione e sfasamento a un'onda quadra scritta in armoniche di Fourier. Nella figura \ref{plt:DSOAC} si simula la visualizzazione all’oscilloscopio di un’onda quadra di frequenza $f = 40$ Hz sottoposta all’azione di un filtro passa-alto con $f_T = 10$ Hz. 
+\begin{figure}[!htb]
+	\centering 
+ 		\includegraphics[scale=0.9]{./DSOAC.pdf}
+ 	\caption{Fit dell'onda quadra distorta in accoppiamento AC da campionamento con oscilloscopio digitale\label{plt:DSOAC}}
+\end{figure}
+Dunque ripetendo lo stesso fit una volta rimossi gli outlier a più di 4 barre d'errore di distanza nelle zone più spigolose del modello si ottiene un test del $\chi^2$ ragionevole \ref{plt:AC_out}
+\begin{align*}
+f &= 40.647 \pm 0.003 \; \rm Hz \\
+A &= 3.62 \pm 0.05 \; \rm V \\
+B &= 17.8 \pm 1.2 \; \rm mV \\
+\phi &= 1996.7 \pm 0.2 \; \mathrm{m}\; \pi \si{\radian} \\
+f_{\rm TA} &= 8.69 \pm 0.01 \; \rm Hz \\
+f_{\rm TB} &= 2.99 \pm 0.04 \; \si{\kilo\hertz} \\
+\sigma_{f, A} &= 0.22 \\   
+\sigma_{f, B} &= -0.04 \\
+\sigma_{f, \phi} &= -0.92 \\
+\sigma_{f, f_{\rm TA}} &= -0.01 \\
+\sigma_{f, f_{\rm TB}} &= 0.23 \\
+\sigma_{A, B} &= 0.004 \\
+\sigma_{A, \phi} &= -0.37 \\
+\sigma_{A, f_{\rm TA}} &= -0.26 \\
+\sigma_{A, f_{\rm TB}} &= 0.99 \\
+\sigma_{B, \phi} &= 10^-4 \\
+\sigma_{B, f_{\rm TA}} &= 0.03 \\
+\sigma_{\phi, f_{\rm TA}} &= 0.01 \\
+\sigma_{\phi, f_{\rm TB}} &= -0.37 \\
+\sigma_{f_{\rm TA}, f_{\rm TB}} &= -0.17 \\
+\chi^2 &= 6483/6060 \\
+\text{abs\_sigma} &= \rm False
+\end{align*}
+\begin{figure}[!htb]
+	\centering 
+ 		\includegraphics[scale=0.9]{./AC_out.pdf}
+ 	\caption{Fit dell'onda quadra distorta in accoppiamento AC con rimozione degli outlier \label{plt:AC_out}}
+\end{figure}
+\section{Simulazione dell'attenuazione in risposta di un circuito RC}
+\begin{figure}[!htb]
+	\centering 
+ 		\scalebox{0.9}{\input{./gain5+.pgf}}
+ 	\caption{"Ricostruzione" delle attenuazioni in uscita dall’integratore e dalla cascata integratore+derivatore in funzione della frequenza di lavoro e di taglio (riportate nel titolo). Le curve tratteggiate e punteggiate rappresentano gli andamenti attesi per onde sinusoidali (le espressioni scritte sul grafico). Il grafico si riferisce a 400 valori di frequenza distinti ed equispaziati logaritmicamente \label{plt:gain}}
+\end{figure}
+\subsection*{Nota sul metodo di fit}
+Per determinare i parametri ottimali e le rispettive varianze si \`e implementato un metodo di fit basato sui minimi quadrati mediante la funzione \emph{curve\_fit} di Python.
+Per tutti i \emph{fit} con campionamenti digitali di Arduino si è imposto $\rm{abs\_sigma} = \rm True$ in quanto come incertezza si prende il valore convenzionale $\sigma = \pm 1$ [digit], per cui effettivamente si sta eseguendo un fit dei minimi quadrati.\\
+\medskip
+\bibliographystyle{IEEEtrandoi}
+\bibliography{refs}
+\end{document}
+%\begin{figure}[!htb]
+%	\centering 
+% 		\includegraphics[scale=0.9]{./figs/dist.pdf}
+% 	\caption{Distribuzione delle • per $• = • \pm • \rm •$ \label{dist:5V}}
+%\end{figure}
