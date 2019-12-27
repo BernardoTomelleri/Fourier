@@ -131,8 +131,8 @@ def plot(waves, x, args=args(f=1.,A_pp=1., B=0., phi=0.), tick=False):
     ax.tick_params(which='minor', direction='in', width=1., top=True, right=True)
 
 # Extrazione dei vettori di campionamenti ed attenuazioni misurate
-t, V = np.loadtxt('../RC/data_int/syncsqw_70.txt', unpack=True)
-F, dF, Att, dAtt, Btt, dBtt = np.genfromtxt('../RC/Att_data.csv', float, delimiter=',',
+t, V = np.loadtxt('./data_int/syncsqw_70.txt', unpack=True)
+F, dF, Att, dAtt, Btt, dBtt = np.genfromtxt('./Att_data.csv', float, delimiter=',',
 skip_header = 1, usecols=(0, 1, 8, 9, 10, 11), unpack = True)
 if DSO:
     t, V = np.genfromtxt('./DSO1000/DSO00001.csv', float, delimiter=',',

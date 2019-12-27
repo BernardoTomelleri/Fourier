@@ -175,7 +175,7 @@ doutV=np.array([])
 j=0
 k=0
 #tengo solo i dati che si discostano dal modello per meno
-# di 3 deviazioni standard
+# di 3.5 deviazioni standard
 soglia = 3.5
 for i in range (len(sDV)):
     if (np.abs(sDV[i] - cas(st, *pars)[i])< soglia*dDV[i]): 
@@ -250,7 +250,7 @@ print('Covarianza normalizzata phiwTa:',corr_phiwTa)
 print('Covarianza normalizzata phiwTb:',corr_phiwTb)
 print('Covarianza normalizzata wTawTb:',corr_wTawTb)
 
-# Plot DV vs t con outliers di par
+# Plot DV vs t con outliers di cas
 fig2,(ax1, ax2) = plt.subplots(2,1, True, gridspec_kw={'wspace':0.05,
      'hspace':0.05, 'height_ratios': [3, 1]})
 if(log):
