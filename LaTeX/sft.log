@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.26)  28 DEC 2019 17:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.26)  28 DEC 2019 23:33
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1507,7 +1507,7 @@ ternal.code.tex
 ternalshared.code.tex)))
 \openout3 = `sft.auxlock'.
 
- (../../Template/math.tex
+ (./math.tex
 Package thmtools Info: Key `qed' (with value `')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
@@ -2006,26 +2006,17 @@ e pdfs with page group included in a single page
 >] (./sft.bbl [9]) [10]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 363.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 363.
- (./sft.aux
-
-Package mparhack Warning: Marginpars may have changed.
-(mparhack)                Rerun to get them right.
-
-)
+ (./sft.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 363.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 363.
 Package rerunfilecheck Info: File `sft.out' has not changed.
 (rerunfilecheck)             Checksum: A3CE25CCB15761BF03F1C5F9D013C3FF;588.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 363.
  ) 
 Here is how much of TeX's memory you used:
- 62899 strings out of 492609
- 1488458 string characters out of 6132817
- 6487129 words of memory out of 7999999
+ 62898 strings out of 492609
+ 1488404 string characters out of 6132817
+ 6487107 words of memory out of 7999999
  65689 multiletter control sequences out of 15000+600000
  741634 words of font info for 276 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191

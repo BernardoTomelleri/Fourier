@@ -1,0 +1,243 @@
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\loc}{\mathit{loc}}
+\newcommand{\weakto}{\rightharpoonup}
+\newcommand{\implied}{\Longleftarrow}
+\let\subsetstrict\subset
+\renewcommand{\subset}{\subseteq}
+\renewcommand{\supset}{\supseteq}
+
+% calligraphic letters
+\newcommand{\A}{\mathcal A}
+\newcommand{\B}{\mathcal B}
+\newcommand{\C}{\mathcal C}
+\newcommand{\D}{\mathcal D}
+\newcommand{\E}{\mathcal E}
+\newcommand{\F}{\mathcal F}
+\newcommand{\FL}{\mathcal F\!\mathcal L}
+\renewcommand{\H}{\mathcal H}
+\newcommand{\K}{\mathcal K}
+\renewcommand{\L}{\mathcal L}
+\newcommand{\M}{\mathcal M}
+\renewcommand{\P}{\mathcal P}
+\renewcommand{\S}{\mathcal S}
+\newcommand{\U}{\mathcal U} %% intorni
+
+% blackboard letters
+\newcommand{\CC}{\mathbb C}
+\newcommand{\HH}{\mathbb H}
+\newcommand{\KK}{\mathbb K}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\TT}{\mathbb T}
+\newcommand{\ZZ}{\mathbb Z}
+
+%\newcommand{\abs}[1]{{\left|#1\right|}}
+\newcommand{\Abs}[1]{{\left\Vert #1\right\Vert}}
+\newcommand{\enclose}[1]{{\left( #1 \right)}}
+\newcommand{\Enclose}[1]{{\left[ #1 \right]}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+
+\newcommand{\To}{\rightrightarrows}
+\renewcommand{\vec}[1]{\boldsymbol #1}
+\newcommand{\defeq}{:=}
+\DeclareMathOperator{\divergence}{div}
+\renewcommand{\div}{\divergence}
+\DeclareMathOperator{\Imaginarypart}{Im}
+\renewcommand{\Im}{\Imaginarypart}
+\DeclareMathOperator{\Realpart}{Re}
+\renewcommand{\Re}{\Realpart}
+%\DeclareMathOperator{\arg}{arg}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\arctg}{arctg}
+\DeclareMathOperator{\settsinh}{settsinh}
+\DeclareMathOperator{\settcosh}{settcosh}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\diag}{diag}
+
+\declaretheoremstyle[
+spaceabove=6pt, spacebelow=6pt,
+headfont=\normalfont\bfseries\itshape,
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont,
+postheadspace=1em,
+qed=,
+%shaded={rulecolor=pink!30,rulewidth=1pt,bgcolor=pink!10}
+]{exercise_style}
+
+\declaretheoremstyle[
+spaceabove=6pt, spacebelow=6pt,
+postheadspace=1em,
+qed=,
+%shaded={rulecolor=blue!20,rulewidth=1pt,bgcolor=blue!5}
+]{theorem_style}
+
+\declaretheoremstyle[
+spaceabove=6pt, spacebelow=6pt,
+postheadspace=1em,
+qed=,
+%shaded={rulecolor=yellow!50,rulewidth=1pt,bgcolor=yellow!5}
+]{axiom_style}
+
+\declaretheorem[name=Teorema]{theorem}
+\declaretheorem[name=Lemma,sibling=theorem]{lemma}
+\declaretheorem[name=Proposizione,sibling=theorem]{proposition}
+\declaretheorem[name=Corollario,sibling=theorem]{corollary}
+\declaretheorem[name=Paradosso,sibling=theorem]{paradox}
+\declaretheorem[style=axiom_style,name=Assioma,sibling=theorem]{axiom}
+\declaretheorem[name=Definizione,sibling=theorem]{definition}
+\declaretheorem[style=exercise_style,name=Esempio,sibling=theorem]{example}
+\declaretheorem[style=exercise_style,name=Esercizio,sibling=theorem]{exercise}
+\declaretheorem[style=exercise_style,name=Osservazione,sibling=theorem]{remark}
+
+% Logarithm with arbitrary base.
+% -> log_10
+\newcommand{\llog}[1][10]{\log_{#1}}
+
+% Absolute value.
+% -> |x|
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+% Powers.
+% -> x^a
+\newcommand{\power}[2][2]{\left( #2 \right)^{#1}}
+
+% Square.
+% -> x^2
+\newcommand{\sq}[1]{\power[2]{#1}}
+
+% Expansion of the binomial coefficient.
+% -> n1!/(n2!(n1 - n2)!)
+\newcommand{\binomexpr}[2]{\frac{#1!}{#2!(#1 - #2)!}}
+
+% Expression evaluation at a given point with square brackets.
+% -> [x]_{a}
+\newcommand{\at}[2]{\left[ #1\right]_{\makebox[-1pt][l]{${\scriptstyle#2}$}}}
+
+% Expression evaluation in an interval.
+% -> [x] _{a}^{b}
+\newcommand{\eval}[3]{\left.#1%
+  \right|_{\makebox[-1pt][l]{${\scriptstyle#2}$}}^{\makebox[-1pt][l]{${\scriptstyle#3}$}}}
+
+% Upright d in math mode (for differentials).
+% -> d
+\newcommand{\ud}{\mathrm{d}}
+
+% Differential.
+% -> dx
+\newcommand{\diff}[1][x]{\,\ud{#1}}
+
+% Base command for defining derivatives.
+% -> df/dx or d^kf/dx^k
+\newcommand{\basederivative}[4][]{%
+  \displaystyle%
+  \ifx\\#1\\\frac{#4#2}{#4#3}%
+  \else%
+  \frac{#4^#1#2}{#4#3^#1}%
+  \fi%
+}
+
+% Total derivative.
+% -> df/dx(x) or d^kf/dx^k(x)
+\newcommand{\td}[4][]{%
+  \basederivative[#1]{#2}{#3}{\ud}%
+  \ifx\\#4\\%
+  \else%
+  \mkern-4mu\left(#4\right)%
+  \fi%
+}
+
+% Partial derivative.
+% -> df/dx(x) or d^kf/dx^k(x)
+\newcommand{\pd}[4][]{%
+  \basederivative[#1]{#2}{#3}{\partial}%
+  \ifx\\#4\\%
+  \else%
+  \mkern-4mu\left(#4\right)%
+  \fi%
+}
+
+\newcommand{\intinf}{\int_{-\infty}^{\infty}\!\!\!}
+
+\newcommand{\cinterval}[2]{\left[\, #1,~#2 \,\right]}
+
+\newcommand{\linterval}[2]{\left[\, #1,~#2 \,\right)}
+
+\newcommand{\rinterval}[2]{\left(\, #1,~#2 \,\right]}
+
+\newcommand{\ointerval}[2]{\left(\, #1,~#2 \,\right)}
+
+\newcommand{\prob}[1]{\displaystyle P\left(#1\right)}
+
+\newcommand{\pvalue}{\emph{$p$-value}}
+
+\newcommand{\cond}{\,|\,}
+
+\newcommand{\expect}[1]{\displaystyle E\left[#1\right]}
+
+\newcommand{\mom}[2][]{\displaystyle {\cal M}_{#2}\ifx\\#1\\\else(#1)\fi}
+
+\newcommand{\momalg}[1]{\displaystyle \lambda_{#1}}
+
+\newcommand{\momcen}[1]{\displaystyle \mu_{#1}}
+
+\newcommand{\skewness}{\displaystyle \gamma_1}
+
+\newcommand{\kurtosis}{\displaystyle \gamma_2}
+
+\newcommand{\charf}[1][x]{\phi_{#1}}
+
+\newcommand{\momgenf}[1][x]{M_{#1}}
+
+\newcommand{\fwhm}{{\scriptstyle \textsc{FWHM}}}
+
+\newcommand{\hwhm}{{\scriptstyle \textsc{HWHM}}}
+
+\newcommand{\median}{\mu_{\nicefrac{1}{2}}}
+
+\newcommand{\var}[1]{\ensuremath{\text{Var}\left(#1\right)}}
+
+\newcommand{\cov}[2]{\ensuremath{\text{Cov}\left(#1, #2\right)}}
+
+\newcommand{\corr}[2]{\ensuremath{\text{Corr}\left(#1, #2\right)}}
+
+\newcommand{\like}{\mathcal L}
+
+\newcommand{\likelihood}[2][]{\like\ifx\\#2\\\else(#2\ifx\\#1\\\else;#1\fi)\fi}
+
+\newcommand{\chisq}{\ensuremath{\chi^2}}
+
+\newcommand{\chisquare}[2][]{\chisq\ifx\\#2\\\else(#2\ifx\\#1\\\else;#1\fi)\fi}
+
+\newcommand{\loglikelihood}[2][]{\log\likelihood[#1]{#2}}
+
+\newcommand{\pdf}[3][]{#2(#3\ifx\\#1\\\else;#1\fi)}
+
+\newcommand{\binomialpdf}[2][]{\pdf[#1]{\mathcal B}{#2}}
+
+\newcommand{\multinomialpdf}[2][]{\pdf[#1]{\mathcal M}{#2}}
+
+\newcommand{\poissonpdf}[2][]{\pdf[#1]{\mathcal P}{#2}}
+
+\newcommand{\uniformpdf}[2][]{\pdf[#1]{u}{#2}}
+
+\newcommand{\exponentialpdf}[2][]{\pdf[#1]{\varepsilon}{#2}}
+
+\newcommand{\gausspdf}[2][]{\pdf[#1]{N}{#2}}
+
+\newcommand{\chisquarepdf}[2][]{\pdf[#1]{\wp}{#2}}
+
+\newcommand{\cauchypdf}[2][]{\pdf[#1]{c}{#2}}
+
+\newcommand{\erf}[1]{\ensuremath{\text{erf}\left(#1\right)}}
+
+\newcommand{\dccases}[4][]{#2 \ifx\\#2\\\else=\fi %
+  \begin{cases}
+    \displaystyle #3 & \text{per variabili discrete}\\
+    \displaystyle #4 & \text{per variabili continue}#1
+  \end{cases}
+}
