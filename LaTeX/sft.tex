@@ -272,6 +272,11 @@ Si noti come i punti considerati "outliers", a più di 2.5 barre d'errore di dis
 \subsection{Serie di derivatore e integratore}
 Supponiamo trascurabili sia gli effetti delle resistenze interne dei componenti sia quelli di mismatch tra i sottocircuiti A e B collegati in cascata. Dal metodo simbolico sappiamo che gli effetti sulle armoniche in uscita da A andranno ad aggiungersi a quelli dovuti al derivatore B, per cui in uscita ci aspettiamo un'espressione del tipo:
 \lstinputlisting[language=Python, firstline=86, lastline=98]{../sft.py}
+\begin{figure}[!htb]
+	\scalebox{0.55}{\input{./cas50.pgf}}\hfill \scalebox{0.55}{\input{./cas200.pgf}}
+	\scalebox{0.55}{\input{./cas2k.pgf}}\hfill \scalebox{0.55}{\input{./cas20k.pgf}}
+ 	\caption{Sviluppo in serie di Fourier per l'onda in uscita dalla cascata di integratore e derivatore A+B per $\lambda$ iterazioni al variare della frequenza $f$. L'asse dei tempi è sempre un array da 1000 punti equispaziati linearmente. \label{plt:cas}}
+\end{figure}
 Dunque, come prima per confrontare i risultati della simulazione con quanto osservato sperimentalmente otteniamo i parametri ottimali dell'onda quadra da un fit sugli stessi dati a cui verrà sovrapposta:\\
 \iffalse
 \begin{align*}

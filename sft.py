@@ -35,7 +35,7 @@ dfT_b = fT_b*0.1
 print('Frequenza Taglio B = %.e +- %.e' %(fT_b, dfT_b))
 # Definizioni variabili per la serie di Fourier
 t0 = 0.         # tempi iniziale
-tN = 100.       # e finale
+tN = 0.2       # e finale
 n_points = 1000 # punti equispaziati
 sums = 10000    # termini nella serie
 # Array di appoggio per lo sviluppo in serie
@@ -106,7 +106,7 @@ def chitest(y, dy, model, ddof=0):
     return chisq, ndof, sigma    
 
 # Variabili di controllo dei grafici in ordine decrescente di pesantezza
-log=True
+log=False
 tex=True
 tick=True
 DSO = False
@@ -119,14 +119,16 @@ def plot(waves, x, args=args(f=1.,A_pp=1., B=0., phi=0.), tick=False):
     # Grafico di segnali nel tempo
     fig, ax = plt.gcf(), plt.gca()
     for f in waves:
-        ax.plot(x, f(x, *args))
+        ax.plot(x, f(x, *args), label='$\lambda = 10000$\n $f = %.f$ kHz'%args.f)
     ax.grid(c = 'gray', ls = '--', alpha=0.7)
-    ax.set_xlabel('Tempo $t$ [ms]', x=0.92)
+    ax.set_xlabel('Tempo $t$ [$\mu$s]', x=0.92)
     ax.set_ylabel('Ampiezza [arb. un]')
     ax.minorticks_on()
     if tick:
-        ax.xaxis.set_major_locator(plt.MultipleLocator((tN-t0)/10.))
-        ax.xaxis.set_minor_locator(plt.MultipleLocator((tN-t0)/50.))
+        ax.xaxis.set_major_locator(plt.MultipleLocator((tN-t0)/1e-2))
+        ax.xaxis.set_minor_locator(plt.MultipleLocator((tN-t0)/5e-2))
+        ax.yaxis.set_major_locator(plt.MultipleLocator(0.05))
+        ax.yaxis.set_minor_locator(plt.MultipleLocator(0.01))
     ax.tick_params(direction='in', length=5, width=1., top=True, right=True)
     ax.tick_params(which='minor', direction='in', width=1., top=True, right=True)
 
@@ -149,16 +151,17 @@ y1 = y[x>x_min]; sy = y1[x1<x_max];
 dx = np.full(len(sx), 4.)/1.e3
 dy = np.full(len(sy), 2.)
 # Fit dei campionamenti con una pinna di squalo
-init=(0.07, 734, 160, 1)
-popt, pcov = curve_fit(fin, sx, sy, init, dy, absolute_sigma = True)
-f_fit, A_fit, B_fit, phi_fit = popt
-df_fit, dA_fit, dB_fit, dphi_fit = np.sqrt(pcov.diagonal())
-chisq, ndof, sigma = chitest(sy, dy, fin(sx, *popt), ddof=len(popt))
-print('Chi quadro/ndof = %f/%d [%+.1f]' % (chisq, ndof, sigma))
+init=(20, 734, 160, 1)
+# popt, pcov = curve_fit(fin, sx, sy, init, dy, absolute_sigma = True)
+# f_fit, A_fit, B_fit, phi_fit = popt
+# df_fit, dA_fit, dB_fit, dphi_fit = np.sqrt(pcov.diagonal())
+# chisq, ndof, sigma = chitest(sy, dy, fin(sx, *popt), ddof=len(popt))
+# print('Chi quadro/ndof = %f/%d [%+.1f]' % (chisq, ndof, sigma))
 fig, ax = plt.subplots()
-ax.errorbar(sx, sy, dy, dx,'ko', ms=1.5, elinewidth=1., capsize=1.5,
-            ls='',label='data', zorder=5)    
-plot([fin], tt, args(*popt), tick=True)
+# ax.errorbar(sx, sy, dy, dx,'ko', ms=1.5, elinewidth=1., capsize=1.5,
+#             ls='',label='data', zorder=5)    
+plot([cas], tt*1e3, args(*init), tick=True)
+legend = ax.legend(loc ='best', framealpha = 0.4)
 # Attenuazione dell'onda simulata su un intervallo di frequenze frng
 def sim(func=fin, x=sx, frng=F):
     simA=np.zeros(len(frng))
