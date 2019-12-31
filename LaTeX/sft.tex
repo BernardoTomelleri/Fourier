@@ -75,7 +75,7 @@ Riportiamo lo schema dei circuiti RC dell'integratore A e del derivatore B:
 \begin{center}
 \begin{circuitikz}
 \draw (0,0)
-	to[sqV] (0,1.5) % The current source
+	to[sqV, v=$V_{\rm in}$] (0,1.5) % The current source
 	to [R = $r_{\rm G}$] (0,3)
 	to[R = $R_A$, *-*] (3,3)
 	to[C= $C_A$, -*] (3,0)
@@ -93,7 +93,7 @@ Riportiamo lo schema dei circuiti RC dell'integratore A e del derivatore B:
 \qquad\quad
 \begin{circuitikz}
 \draw (0,0)
-	to[sqV] (0,1.5) % The current source
+	to[sqV, v=$V_{\rm in}$] (0,1.5) % The current source
 	to [R = $r_{\rm G}$] (0,3)
 	to[C = $C_B$, *-*] (3,3)
 	to[R = $R_B$,*-*] (3,0)
@@ -113,7 +113,7 @@ E lo schema circuitale dell'intero apparato strumentale: integratore e derivator
 \begin{center}
 \begin{circuitikz}[scale = 0.1]
 \draw (-90,0)
-	to[sqV] (-90,15) % The current source
+	to[sqV, v=$V_{\rm in}$] (-90,15) % The current source
 	to [R = $r_{\rm G}$] (-90,30)
 	to[R = $R_A$, *-*] (-60,30)
 	to[C, l_=$C_A$, -*] (-60,0)
@@ -186,24 +186,6 @@ Si può dimostrare che tutte le funzioni periodiche, che presentano discontinuit
  	\caption{Sviluppo in serie di Fourier per un’onda quadra per $\lambda$ iterazioni confrontato con un onda quadra definita analiticamente da un if-else. L'asse dei tempi è sempre un array da 1000 punti equispaziati linearmente.
  \label{plt:sqw}}
 \end{figure}
-\iffalse
-A partire da una serie di punti campionati con Arduino di un onda quadra in uscita dal generatore di funzioni
-Lasciando liberi tutti i parametri $A$, $\omega$, $\phi$ e $B$ si ottengono i valori:
-\begin{align*}
-A &= 67.68 \pm 0.07 \; \rm digit \\
-B &= 166.81 \pm 0.05 \; \rm digit \\
-\omega &= 315.459 \pm 0.021 \; \rm rad/s \\  
-\phi &= 217.6 \pm 2.2 \; \rm m rad \\
-\sigma_{f, A} &= 0.02 \\   
-\sigma_{f, B} &= -0.02 \\
-\sigma_{f, \phi} &= -0.006 \\
-\sigma_{A, B} &= -0.87 \\
-\sigma_{A, \phi} &= -0.04 \\   
-\sigma_{B, \phi} &= 0.03 \\
-\chi^2 &= 1677.3/1513 \quad [+ 3 \sigma] \\
-\text{abs\_sigma} &= \rm True
-\end{align*}
-\fi
 \subsection{Onda triangolare}
 Si è implementata in Python l'espressione dell'onda prevista dallo sviluppo in serie di Fourier:
 \begin{equation}
@@ -216,29 +198,6 @@ Da uno studio sulla qualità della forma d'onda analogo al caso precedente, dall
 	\scalebox{0.55}{\input{./trg100.pgf}}\hfill \scalebox{0.55}{\input{./trg1k.pgf}}
  	\caption{Sviluppo in serie di Fourier per un’onda triangolare per $\lambda$ iterazioni confrontato con una stessa definita analiticamente da un if-else. L'asse dei tempi è sempre un array da 1000 punti equispaziati linearmente. \label{plt:trg}}
 \end{figure}
-\iffalse
-Mentre da un fit con modello a onda triangolare,
-ovvero supponendo che il circuito abbia agito più come un filtro che da integratore sul segnale $V_{\rm in}$ si trova, lasciando tutti i parametri liberi:
-\begin{align*}
-A &= 836.8 \pm 1.5 \; \rm mV \\
-B &= 69.8 \pm 0.9 \; \rm mV \\
-\omega &= 285.68 \pm 0.04 \; \rm rad/s \\  
-\phi &= 162.4 \pm 1.8 \; \rm m rad \\
-\sigma_{f, A} &= 0.03 \\   
-\sigma_{f, B} &= -0.02 \\
-\sigma_{f, \phi} &= 0.06 \\
-\sigma_{A, B} &= -0.44 \\
-\sigma_{A, \phi} &= 0.03 \\   
-\sigma_{B, \phi} &= 0.003 \\
-\chi^2 &= 219001/6996 \\
-\text{abs\_sigma} &= \rm True
-\end{align*}
-\begin{figure}[!htb]
-	\centering 
- 		\scalebox{0.9}{\input{./ardtrg.pgf}}
- 	\caption{Fit triangolare della d.d.p nel tempo  all' uscita dell'integratore \label{plt:ardtrg}}
-\end{figure}
-\fi
 \subsection{Onda a pinna di squalo}
 Si è implementata in Python l'espressione dell'onda, applicando la $T(\omega)$ ad ogni armonica nella serie dell'onda quadra \eqref{eq:sqw} secondo quanto previsto dal metodo dei fasori per un'onda sinusoidale in uscita da un integratore RC:
 \begin{align}\label{eq:fin}
@@ -298,31 +257,11 @@ Supponiamo trascurabili sia gli effetti delle resistenze interne dei componenti 
 	\scalebox{0.55}{\input{./cas2k.pgf}}\hfill \scalebox{0.55}{\input{./cas20k.pgf}}
  	\caption{Sviluppo in serie di Fourier per l'onda in uscita dalla cascata di integratore e derivatore A+B per $\lambda$ iterazioni al variare della frequenza $f$. L'asse dei tempi è sempre un array da 1000 punti equispaziati linearmente. \label{plt:cas}}
 \end{figure}
-Dunque, come prima per confrontare i risultati della simulazione con quanto osservato sperimentalmente otteniamo i parametri ottimali dell'onda quadra da un fit sugli stessi dati a cui verrà sovrapposta:\\
-\iffalse
-\begin{align*}
-A &= 243.80 \pm 0.08 \; \rm mV \\
-B &= 70.49 \pm 0.16 \; \rm mV \\
-T &= 21.9877 \pm 0.0006 \; \rm ms \\
-\omega &= 285.756 \pm 0.008 \; \rm rad/s \\  
-\phi &= 6021.5 \pm 1.3 \; \rm m rad \\
-\sigma_{f, A} &= -0.11 \\   
-\sigma_{f, B} &= 0.53 \\
-\sigma_{f, \phi} &= -0.04 \\ 
-\sigma_{A, B} &= 0.06 \\
-\sigma_{A, \phi} &= 0.07 \\  
-\sigma_{B, \phi} &= -0.0009 \\
-\chi^2 &= 7341.6/6696 \\
-\text{abs\_sigma} &= \rm True
-\end{align*}
-\begin{figure}[!htb]
-	\centering 
-% 		\scalebox{0.9}{\input{./ardAB.pgf}}
- 	\caption{Fit quadratico della d.d.p nel tempo da campionamento con oscilloscopio digitale \label{plt:DSOpar}}
-\end{figure}
-\fi
+Confrontare come prima i risultati della simulazione con quanto osservato
+sperimentalmente non è più facilmente possibile per via del limitato rate di
+campionamento del sistema di acquisizione.
 \subsection{Accoppiamento AC dell'oscilloscopio}
-L’accoppiamento AC in ingresso all’oscilloscopio taglia la componente continua del segnale visualizzato mediante un condensatore di capacità $C_{\rm AC}$ in serie al segnale che, una volta carico, impedisce il passaggio di corrente. Assieme alla resistenza di ingresso dell’oscilloscopio (nel nostro caso $R_{\rm osc} = 1 \si{\mega\ohm}$ nominale\footnote{In realtà lo stadio di ingresso dell’oscilloscopio prevede il parallelo tra $R_{\rm osc}$ e un piccolo condensatore $C_{\rm osc} = 20 pF$ nominali per modellare capacità parassite dovute ai connettori e ai circuiti interni allo strumento. Dunque lo stadio di ingresso ha una impedenza di ingresso data da $Z_{\rm osc}= R_{\rm osc} + \frac{1}{j \omega C_{\rm osc}} $. I moduli delle impedenze dei due componenti in parallelo diventano comparabili per $\omega = 5 \times 10^4 \si{\radian\per\s}$. Perciò trascurare la presenza del condensatore $C_{\rm osc}$ è, a rigore, giustificato fintanto che la frequenza di lavoro è $f << 300 \; \si{\kilo\hertz}$}) tra segnale e linea di terra, il condensatore realizza un circuito derivatore RC/HPF. Di conseguenza, in accoppiamento AC,  forme d’onda quadre a bassa frequenza $\sim f_T = (2\pi R_{\rm osc}C_{\rm AC})^{-1}$ assumono la forma caratteristica dell'esponenziale di carica/scarica del condensatore. Dalle specifiche tecniche sappiamo che in AC l'oscilloscopio attenua le componenti del segnale sotto i $10$ Hz, per cui ci si aspetta $C_{\rm AC} \approx 4 \; \si{\nano\F}$. Si è ricostruita questa distorsione con lo stesso metodo simbolico applicando attenuazione e sfasamento a un'onda quadra scritta in armoniche di Fourier, dunque si confronta quanto previsto con il campionamento dell'onda eseguito dall'oscilloscopio digitale stesso che opera la distorsione. Come prima si ottengono i parametri di best \emph{fit} per la forma d'onda mediante la stessa routine di minimizzazione del $\chi^2$, stavolta però imponendo $\rm{abs\_sigma} = \rm False$, in quanto non è altrettanto nota la natura della fonte principale di errore sulle misure. Nella figura \ref{plt:DSOAC} si vede la sovrapposizione e simulazione di campionamento all’oscilloscopio, con rate di campionamento $f_s = 0.1 \mathrm{MSa/s}$, di un’onda quadra di frequenza $f = 40$ Hz sottoposta all’azione di un filtro passa-alto con $f_T = 10$ Hz. 
+L’accoppiamento AC in ingresso all’oscilloscopio taglia la componente continua del segnale visualizzato mediante un condensatore di capacità $C_{\rm AC}$ in serie al segnale che, una volta carico, impedisce il passaggio di corrente. Assieme alla resistenza di ingresso dell’oscilloscopio (nel nostro caso $R_{\rm osc} = 1 \; \si{\mega\ohm}$ nominale\footnote{In realtà lo stadio di ingresso dell’oscilloscopio prevede il parallelo tra $R_{\rm osc}$ e un piccolo condensatore $C_{\rm osc} = 20 pF$ nominali per modellare capacità parassite dovute ai connettori e ai circuiti interni allo strumento. Dunque lo stadio di ingresso ha una impedenza di ingresso data da $Z_{\rm osc}= R_{\rm osc} + \frac{1}{j \omega C_{\rm osc}} $. I moduli delle impedenze dei due componenti in parallelo diventano paragonabili per $\omega = 5 \times 10^4 \si{\radian\per\s}$. Perciò trascurare la presenza del condensatore $C_{\rm osc}$ è, a rigore, giustificato fintanto che la frequenza di lavoro è $f << 300 \; \si{\kilo\hertz}$}) tra segnale e linea di terra, il condensatore realizza un circuito derivatore RC/HPF. Di conseguenza, in accoppiamento AC,  forme d’onda quadre a bassa frequenza $\sim f_T = (2\pi R_{\rm osc}C_{\rm AC})^{-1}$ assumono la forma caratteristica dell'esponenziale di carica/scarica del condensatore. Dalle specifiche tecniche sappiamo che in AC l'oscilloscopio attenua le componenti del segnale sotto i $10$ Hz, per cui ci si aspetta $C_{\rm AC} \approx 4 \; \si{\nano\F}$. Si è ricostruita questa distorsione con lo stesso metodo simbolico applicando attenuazione e sfasamento a un'onda quadra scritta in armoniche di Fourier, dunque si confronta quanto previsto con il campionamento dell'onda eseguito dall'oscilloscopio digitale stesso che opera la distorsione. Come prima si ottengono i parametri di best \emph{fit} per la forma d'onda mediante la stessa routine di minimizzazione del $\chi^2$, stavolta però imponendo $\rm{abs\_sigma} = \rm False$, in quanto non è altrettanto nota la natura della fonte principale di errore sulle misure. Nella figura \ref{plt:DSOAC} si vede la sovrapposizione e simulazione di campionamento all’oscilloscopio, con rate di campionamento $f_s = 0.1 \; \mathrm{MSa/s}$, di un’onda quadra di frequenza $f = 40$ Hz sottoposta all’azione di un filtro passa-alto con $f_T = 10$ Hz. 
 \begin{figure}[!htb]
 	\centering 
  		\includegraphics[scale=0.9]{./DSOAC.pdf}
@@ -369,17 +308,18 @@ qualitativamente ben riprodotto dalla simulazione.
 Si vede anche come, per frequenze più alte, i punti si discostano dall'
 andamento atteso, a causa di capacità parassite che cessano di essere
 trascurabili, al contrario di quanto presuppone il nostro modello,
-dunque la simulazione. Per poterne modellare gli effetti si potrebbero,
-ad esempio, considerare dei condensatori in parallelo alla resistenza\footnote{
+dunque la simulazione. Per poterne modellare gli effetti si potrebbe,
+ad esempio, considerare un condensatore in parallelo alla resistenza\footnote{
 In effetti i capi della resistenza, come qualsiasi altri due
-conduttori percorsi da corrente e vicini tra loro formano dei condensatori,
-di capacità tipicamente nell'ordine della decina di $\si{\pico\F}$, i cui
-effetti risultano apprezzabili solo per frequenze superiori alle migliaia
-di Hz. Per raffinare ulteriormente il modello si potrebbero anche considerare
-le resistenze in parallelo ai condensatori, per tenere conto delle "perdite"
-di carica che si determinano nel dielettrico reale al loro interno.}
+conduttori percorsi da corrente e vicini tra loro formano dei condensatori:
+per le dimensioni dei nostri circuiti, di capacità nell'ordine della decina di
+$\si{\pico\F}$, i cui effetti risultano apprezzabili solo per frequenze
+superiori alle migliaia di Hz. Per raffinare ulteriormente il modello si
+potrebbero anche considerare le resistenze in parallelo ai condensatori, per
+tenere conto delle "perdite" di carica che si determinano nel dielettrico
+reale al loro interno, di conseguenza modificando a loro volta l'attenuazione.}
 $R_A$ che, formando una maglia impropria aggiungerebbero uno zero alla risposta
-in frequenza del circuito, che ora assumerebbe un andamento più vicino a
+in frequenza del circuito, che così assumerebbe un andamento più vicino a
 quello delle misure ad alte frequenze.
 \begin{figure}[!htb]
 	\centering 

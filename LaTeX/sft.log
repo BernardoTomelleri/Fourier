@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.26)  31 DEC 2019 01:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.26)  31 DEC 2019 03:01
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1954,71 +1954,66 @@ Package microtype Info: Character `029' is missing
 (microtype)             Ignoring protrusion settings for this character.
 [2] (../sft.py) (./figs/./trg10.pgf) (./figs/./trg50.pgf) (./figs/./trg100.pgf)
 (./figs/./trg1k.pgf)
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 215--217
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 197--199
 [][] []
  []
 
 
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 215--217
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 197--199
 [] [] 
  []
 
 [3] (../sft.py)
-Underfull \hbox (badness 10000) in paragraph at lines 251--253
+Underfull \hbox (badness 10000) in paragraph at lines 210--212
 
  []
 
 [4] (./figs/./ardfin.pgf) [5] (./figs/./ardfin70.pgf) (./figs/./ardfin170.pgf)
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 283--284
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 242--243
 [][] [] 
  []
 
 (../sft.py [6]) (./figs/./cas50.pgf) (./figs/./cas200.pgf) (./figs/./cas2k.pgf)
 (./figs/./cas20k.pgf)
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 297--299
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 256--258
 [][] []
  []
 
 
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 297--299
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 256--258
 [] [] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 301--324
-
  []
 
 <./figs/./DSOAC.pdf, id=158, 462.52798pt x 346.89601pt>
 File: ./figs/./DSOAC.pdf Graphic file (type pdf)
 <use ./figs/./DSOAC.pdf>
-Package pdftex.def Info: ./figs/./DSOAC.pdf  used on input line 328.
+Package pdftex.def Info: ./figs/./DSOAC.pdf  used on input line 267.
 (pdftex.def)             Requested size: 416.27133pt x 312.20352pt.
 [7]
 <./figs/./AC_out.pdf, id=171, 462.52798pt x 346.89601pt>
 File: ./figs/./AC_out.pdf Graphic file (type pdf)
 <use ./figs/./AC_out.pdf>
-Package pdftex.def Info: ./figs/./AC_out.pdf  used on input line 351.
+Package pdftex.def Info: ./figs/./AC_out.pdf  used on input line 290.
 (pdftex.def)             Requested size: 416.27133pt x 312.20352pt.
  (./figs/./gain5+.pgf) [8 <./figs/./DSOAC.pdf>] (./sft.bbl [9 <./figs/./AC_out.
 pdf>]) [10]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 395.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 395.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 335.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 335.
  (./sft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 395.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 395.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 335.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 335.
 Package rerunfilecheck Info: File `sft.out' has not changed.
 (rerunfilecheck)             Checksum: A3CE25CCB15761BF03F1C5F9D013C3FF;588.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 395.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 335.
  ) 
 Here is how much of TeX's memory you used:
- 62883 strings out of 492609
- 1487864 string characters out of 6132817
- 6379159 words of memory out of 7999999
- 65670 multiletter control sequences out of 15000+600000
- 741681 words of font info for 276 fonts, out of 8000000 for 9000
+ 62959 strings out of 492609
+ 1489700 string characters out of 6132817
+ 6379974 words of memory out of 7999999
+ 65744 multiletter control sequences out of 15000+600000
+ 741766 words of font info for 277 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 73i,23n,127p,2386b,2318s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 73i,23n,127p,2393b,2318s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/texlive/2019/tex
 mf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2019/texmf-dist/fonts/enc/
 dvips/lm/lm-ec.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}{c:/
@@ -2048,7 +2043,7 @@ fb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/texlive/2019
 ype1/public/lm/lmsy9.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtk
 10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/texlive
 /2019/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on sft.pdf (10 pages, 1375290 bytes).
+Output written on sft.pdf (10 pages, 1375783 bytes).
 PDF statistics:
  369 PDF objects out of 1000 (max. 8388607)
  303 compressed objects within 4 object streams
