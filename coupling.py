@@ -62,7 +62,7 @@ log=False
 tick=True
 tex=True
 
-init=(40.6, 3735, 0., 2., 54.7, 19421)
+init=(40.6, 3735, 0., 2., 19421, 54.7)
 
 pars, covm = curve_fit(cas, st, sDV, init, dDV, absolute_sigma = False)
 f_fit, A_fit, B_fit, phi_fit, wTa_fit, wTb_fit = pars
@@ -118,7 +118,7 @@ print('Covarianza normalizzata AwTa:',corr_AwTa)
 print('Covarianza normalizzata AwTb:',corr_AwTb)
 print('Covarianza normalizzata Bphi:',corr_Bphi)
 print('Covarianza normalizzata BwTa:',corr_BwTa)
-print('Covarianza normalizzata BwTa:',corr_BwTb)
+print('Covarianza normalizzata BwTb:',corr_BwTb)
 print('Covarianza normalizzata phiwTa:',corr_phiwTa)
 print('Covarianza normalizzata phiwTb:',corr_phiwTb)
 print('Covarianza normalizzata wTawTb:',corr_wTawTb)

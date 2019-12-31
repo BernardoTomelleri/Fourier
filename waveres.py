@@ -22,11 +22,23 @@ wT_a = 2*np.pi*fT_a*1e-3
 #dT_a = 1./2*np.pi*(dtau/tau_a**2)
 dfT_a = fT_a*0.1
 print('Frequenza Taglio A = %.f +- %.f' %(fT_a, dfT_a))
+# Definizione componenti del derivatore B
+R_b = 67.5
+dR_b = np.sqrt((R_b*8e-3)**2 + 0.1**2) 
+C_b = 0.2e-6
+dC_b = C_b*0.1
+tau_b = R_b*C_b
+dtau_b = np.sqrt((R_b*dC_b)**2 + (C_b*dR_b)**2)
+fT_b = 10
+wT_b = 2*np.pi*fT_b*1.e-3
+#dT_b = 1./2*np.pi*(dtau/tau_a**2)
+dfT_b = fT_b*0.1
+print('Frequenza Taglio B = %.1e +- %.e' %(fT_b, dfT_b))
 # Definizioni variabili per la serie di Fourier
 t0 = 1         # tempi iniziale
 tN = 99       # e finale
 n_points = 1000 # punti equispaziati
-sums = 50   # termini nella serie
+sums = 10000   # termini nella serie
 # Array di appoggio per lo sviluppo in serie
 tt=np.linspace(t0, tN, n_points)
 c = np.zeros(sums)
@@ -76,7 +88,21 @@ def fin(t, f=1, A_pp=1, B=0, phi=0):
         Df[k] = np.arctan(-w[k]/wT_a)
         fk += A[k]*c[k]*np.sin(w[k]*t + Df[k])
     t-= phi/(2*f)
-    return fk*A_pp + B    
+    return fk*A_pp + B
+
+def derv(f, fT_der=fT_b):
+    return 1./np.sqrt(1.+(fT_der/f)**2)
+def cas(t, f=1, A_pp=1, B=0, phi=0):
+    t+= phi/(2*f)
+    fk = 0
+    for k in range(1, sums, 2):
+        c[k] = 2./(k*np.pi)
+        w[k] = k*2*np.pi*f
+        A[k] = derv(w[k], wT_b)
+        Df[k] = np.arctan(wT_b/w[k])
+        fk += A[k]*c[k]*np.sin(w[k]*t + Df[k])
+    t-= phi/(2*f)
+    return fk*A_pp + B
 
 def chitest(y, dy, model, ddof=0):
     res = y - model
@@ -231,4 +257,42 @@ print('f = %f +- %f Hz' % (f_fit*1e3, df_fit*1e3))
 print('A = %f +- %f mV' % (A_fit, dA_fit))
 print('B = %f +- %f mV' % (B_fit, dB_fit))
 print('phi = %f +- %f rad' % (phi_fit, dphi_fit))
+# Fit per fin con rimozione outlier
+
+# Test funzione di trasferimento derivatore
+tt=np.linspace(0, 100, n_points)
+init=(0.04, 734, 160, 0)
+fig1,(ax1, ax2) = plt.subplots(2,1, True, gridspec_kw={'wspace':0.05,
+     'hspace':0.05, 'height_ratios': [3, 1]})
+ax1.grid(c = 'gray', ls = '--', alpha=0.7)
+ax1.plot(tt, cas(tt, *init), c='black',
+        label='$\lambda = %d$ ' %sums, zorder=10, alpha=0.7)
+ax1.set_xlabel('Tempo $t$ [ms]', x=0.92)
+ax1.set_ylabel('Ampiezza [arb. un]')
+ax1.minorticks_on()
+if tick:
+    ax1.yaxis.set_major_locator(plt.MultipleLocator(100.))
+    ax1.yaxis.set_minor_locator(plt.MultipleLocator(20))  
+ax1.tick_params(direction='in', length=5, width=1., top=True, right=True)
+ax1.tick_params(which='minor', direction='in', width=1., top=True, right=True)
+legend = ax1.legend(loc ='right', framealpha = 0.3)
+legend.set_zorder(100)
+
+ax2.set_xlabel('Tempo $t$ [ms]', x=0.92)
+ax2.set_ylabel('Residui')
+ax2.axhline(0, c='r', lw=1.1, zorder=10)
+ax2.errorbar(tt, delta, None, None, 'ko', elinewidth = 0.7,
+              capsize=0.7, ms=1., ls='--', lw=0.8, zorder=0)
+ax2.grid(color ='gray', ls = '--', alpha=0.7)
+ax2.ticklabel_format(axis='both', style='sci', scilimits=None,
+                     useMathText=True)
+ax2.minorticks_on()
+ax2.xaxis.set_major_locator(plt.MultipleLocator(10))
+ax2.xaxis.set_minor_locator(plt.MultipleLocator(2))
+if tick:
+    ax2.yaxis.set_major_locator(plt.MultipleLocator(1))
+    ax2.yaxis.set_minor_locator(plt.MultipleLocator(0.2))
+ax2.tick_params(direction='in', length=5, width=1., top=True, right=True)
+ax2.tick_params(which='minor', direction='in', width=1., top=True, right=True)
+
 plt.show()

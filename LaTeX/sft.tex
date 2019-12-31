@@ -261,27 +261,28 @@ Confrontare come prima i risultati della simulazione con quanto osservato
 sperimentalmente non è più facilmente possibile per via del limitato rate di
 campionamento del sistema di acquisizione.
 \subsection{Accoppiamento AC dell'oscilloscopio}
-L’accoppiamento AC in ingresso all’oscilloscopio taglia la componente continua del segnale visualizzato mediante un condensatore di capacità $C_{\rm AC}$ in serie al segnale che, una volta carico, impedisce il passaggio di corrente. Assieme alla resistenza di ingresso dell’oscilloscopio (nel nostro caso $R_{\rm osc} = 1 \; \si{\mega\ohm}$ nominale\footnote{In realtà lo stadio di ingresso dell’oscilloscopio prevede il parallelo tra $R_{\rm osc}$ e un piccolo condensatore $C_{\rm osc} = 20 pF$ nominali per modellare capacità parassite dovute ai connettori e ai circuiti interni allo strumento. Dunque lo stadio di ingresso ha una impedenza di ingresso data da $Z_{\rm osc}= R_{\rm osc} + \frac{1}{j \omega C_{\rm osc}} $. I moduli delle impedenze dei due componenti in parallelo diventano paragonabili per $\omega = 5 \times 10^4 \si{\radian\per\s}$. Perciò trascurare la presenza del condensatore $C_{\rm osc}$ è, a rigore, giustificato fintanto che la frequenza di lavoro è $f << 300 \; \si{\kilo\hertz}$}) tra segnale e linea di terra, il condensatore realizza un circuito derivatore RC/HPF. Di conseguenza, in accoppiamento AC,  forme d’onda quadre a bassa frequenza $\sim f_T = (2\pi R_{\rm osc}C_{\rm AC})^{-1}$ assumono la forma caratteristica dell'esponenziale di carica/scarica del condensatore. Dalle specifiche tecniche sappiamo che in AC l'oscilloscopio attenua le componenti del segnale sotto i $10$ Hz, per cui ci si aspetta $C_{\rm AC} \approx 4 \; \si{\nano\F}$. Si è ricostruita questa distorsione con lo stesso metodo simbolico applicando attenuazione e sfasamento a un'onda quadra scritta in armoniche di Fourier, dunque si confronta quanto previsto con il campionamento dell'onda eseguito dall'oscilloscopio digitale stesso che opera la distorsione. Come prima si ottengono i parametri di best \emph{fit} per la forma d'onda mediante la stessa routine di minimizzazione del $\chi^2$, stavolta però imponendo $\rm{abs\_sigma} = \rm False$, in quanto non è altrettanto nota la natura della fonte principale di errore sulle misure. Nella figura \ref{plt:DSOAC} si vede la sovrapposizione e simulazione di campionamento all’oscilloscopio, con rate di campionamento $f_s = 0.1 \; \mathrm{MSa/s}$, di un’onda quadra di frequenza $f = 40$ Hz sottoposta all’azione di un filtro passa-alto con $f_T = 10$ Hz. 
+L’accoppiamento AC in ingresso all’oscilloscopio taglia la componente continua del segnale visualizzato mediante un condensatore di capacità $C_{\rm AC}$ in serie al segnale che, una volta carico, impedisce il passaggio di corrente. Assieme alla resistenza di ingresso dell’oscilloscopio (nel nostro caso $R_{\rm osc} = 1 \; \si{\mega\ohm}$ nominale\footnote{In realtà lo stadio di ingresso dell’oscilloscopio prevede il parallelo tra $R_{\rm osc}$ e un piccolo condensatore $C_{\rm osc} = 20 pF$ nominali per modellare capacità parassite dovute ai connettori e ai circuiti interni allo strumento. Dunque lo stadio di ingresso ha una impedenza di ingresso data da $Z_{\rm osc}= R_{\rm osc} + \frac{1}{j \omega C_{\rm osc}} $. I moduli delle impedenze dei due componenti in parallelo diventano paragonabili per $\omega = 5 \times 10^4 \si{\radian\per\s}$. Perciò trascurare la presenza del condensatore $C_{\rm osc}$ è, a rigore, giustificato fintanto che la frequenza di lavoro è $f << 300 \; \si{\kilo\hertz}$}) tra segnale e linea di terra, il condensatore realizza un circuito derivatore RC/HPF. Di conseguenza, in accoppiamento AC,  forme d’onda quadre a bassa frequenza $\sim f_T = (2\pi R_{\rm osc}C_{\rm AC})^{-1}$ assumono la forma caratteristica dell'esponenziale di carica/scarica del condensatore. Dalle specifiche tecniche sappiamo che in AC l'oscilloscopio attenua le componenti del segnale sotto i $10$ Hz, per cui ci si aspetta $C_{\rm AC} \approx 4 \; \si{\nano\F}$. Si è ricostruita questa distorsione con lo stesso metodo simbolico applicando attenuazione e sfasamento a un'onda quadra scritta in armoniche di Fourier, dunque si confronta quanto previsto con il campionamento dell'onda eseguito dall'oscilloscopio digitale stesso che opera la distorsione. Poiché la sola azione del passa alto non descrive i dati in maniera soddisfacente, lasciamo liberi in un fit le frequenze di taglio, dunque le possibili attenuazioni e sfasamenti, di entrambi i sottocircuiti. Quindi si ottengono i parametri ottimali per la forma d'onda tramite la stessa routine di minimizzazione del $\chi^2$, stavolta però imponendo $\rm{abs\_sigma} = \rm False$, in quanto non è altrettanto nota la natura della fonte principale di errore sulle misure. Nella figura \ref{plt:DSOAC} si vede la sovrapposizione della simulazione di best \emph{fit} e campionamento all’oscilloscopio, con sampling rate $f_s = 0.1 \; \mathrm{MSa/s}$, di un’onda quadra di frequenza $f = 40$ Hz distorta dall'accoppiamento AC.
 \begin{figure}[!htb]
 	\centering 
  		\includegraphics[scale=0.9]{./DSOAC.pdf}
  	\caption{Fit dell'onda quadra distorta in accoppiamento AC da campionamento con oscilloscopio digitale\label{plt:DSOAC}}
 \end{figure}
-Dunque ripetendo lo stesso fit una volta rimossi gli outlier a più di 4 barre d'errore di distanza nelle zone più spigolose del modello si ottiene un test del $\chi^2$ ragionevole, come illustrato in figura \ref{plt:AC_out}
+Dunque ripetendo lo stesso fit una volta rimossi gli outlier a più di 4 barre d'errore di distanza, concentrati specialmente nelle zone più spigolose del modello, si ottengono le seguenti miglior stime dei parametri e un test del $\chi^2$ ragionevole, come illustrato in figura \ref{plt:AC_out}
 \begin{align*}
 f &= 40.647 \pm 0.003 \; \rm Hz \\
 A &= 3.62 \pm 0.05 \; \rm V \\
 B &= 17.8 \pm 1.2 \; \rm mV \\
 \phi &= 1996.7 \pm 0.2 \; \mathrm{m}\; \pi \si{\radian} \\
-f_{\rm TA} &= 8.69 \pm 0.01 \; \rm Hz \\
-f_{\rm TB} &= 2.99 \pm 0.04 \; \si{\kilo\hertz} \\
-\sigma_{f, A} &= 0.22 \qquad &\sigma_{A, B} &= 0.004 \\
-\sigma_{f, B} &= -0.04 \qquad &\sigma_{A, \phi} &= -0.37 \\
-\sigma_{f, \phi} &= -0.92 \qquad &\sigma_{A, f_{\rm TA}} &= -0.26 \\
-\sigma_{f, f_{\rm TA}} &= -0.01 \qquad &\sigma_{A, f_{\rm TB}} &= 0.99 \\
-\sigma_{f, f_{\rm TB}} &= 0.23 \qquad &\sigma_{B, \phi} &= 10^-4 \\
-\sigma_{B, f_{\rm TA}} &= 0.03 \qquad &\sigma_{\phi, f_{\rm TA}} &= 0.01 \\
-\sigma_{\phi, f_{\rm TB}} &= -0.37 \qquad &\sigma_{f_{\rm TA}, f_{\rm TB}} &= -0.17 \\
+f_{\rm TA} &= 2.99 \pm 0.04 \; \si{\kilo\hertz} \\
+f_{\rm TB} &= 8.69 \pm 0.01 \; \rm Hz \\
+\sigma_{f, A} &= -0.03 \qquad &\sigma_{A, B} &= -0.18 \\
+\sigma_{f, B} &= -0.004 \qquad &\sigma_{A, \phi} &= 0.09 \\
+\sigma_{f, \phi} &= -0.92 \qquad &\sigma_{A, f_{\rm TA}} &= -0.11 \\
+\sigma_{f, f_{\rm TA}} &= 0.23 \qquad &\sigma_{A, f_{\rm TB}} &= 0.19 \\
+\sigma_{f, f_{\rm TB}} &= -0.01 \qquad &\sigma_{B, \phi} &= 10^-4 \\
+\sigma_{B, f_{\rm TA}} &= 0.01 \qquad &\sigma_{B, f_{\rm TB}} &= 0.03 \\
+\sigma_{\phi, f_{\rm TA}} &= -0.37 \qquad &\sigma_{\phi, f_{\rm TB}} &= 0.009 \\
+\sigma_{f_{\rm TA}, f_{\rm TB}} &= -0.17 \\
 \chi^2 &= 6483/6060 \\
 \text{abs\_sigma} &= \rm False
 \end{align*}
@@ -318,7 +319,7 @@ superiori alle migliaia di Hz. Per raffinare ulteriormente il modello si
 potrebbero anche considerare le resistenze in parallelo ai condensatori, per
 tenere conto delle "perdite" di carica che si determinano nel dielettrico
 reale al loro interno, di conseguenza modificando a loro volta l'attenuazione.}
-$R_A$ che, formando una maglia impropria aggiungerebbero uno zero alla risposta
+$R_A$ che, formando una maglia impropria aggiungerebbe uno zero alla risposta
 in frequenza del circuito, che così assumerebbe un andamento più vicino a
 quello delle misure ad alte frequenze.
 \begin{figure}[!htb]
@@ -329,7 +330,7 @@ quello delle misure ad alte frequenze.
 \subsection*{Nota sul metodo di fit}
 Per determinare i parametri ottimali e le rispettive varianze si \`e implementato un metodo di fit basato sui minimi quadrati mediante la funzione \emph{curve\_fit} di Python.
 Per tutti i \emph{fit} con campionamenti digitali di Arduino si è imposto $\rm{abs\_sigma} = \rm True$ in quanto come incertezza si è assunto il valore convenzionale $\sigma = \pm 1$ [digit], per cui effettivamente si esegue un fit dei minimi quadrati.\\
-\pagebreak
+\medskip
 \bibliographystyle{IEEEtrandoi}
 \bibliography{refs}
 \end{document}
