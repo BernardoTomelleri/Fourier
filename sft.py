@@ -32,7 +32,7 @@ fT_b = 1./(2*np.pi*tau_b)
 wT_b = 2*np.pi*fT_b*1.e-3
 #dT_b = 1./2*np.pi*(dtau/tau_a**2)
 dfT_b = fT_b*0.1
-print('Frequenza Taglio B = %.e +- %.e' %(fT_b, dfT_b))
+print('Frequenza Taglio B = %.1e +- %.e' %(fT_b, dfT_b))
 # Definizioni variabili per la serie di Fourier
 t0 = 0.         # tempi iniziale
 tN = 100.       # e finale
@@ -106,7 +106,7 @@ def chitest(y, dy, model, ddof=0):
     return chisq, ndof, sigma    
 
 # Variabili di controllo dei grafici in ordine decrescente di pesantezza
-log=False
+log=True
 tex=True
 tick=True
 DSO = False

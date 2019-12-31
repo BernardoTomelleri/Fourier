@@ -63,14 +63,15 @@ f_{\rm TA} &= \frac{1}{2 \pi R_A C_A} = 11 \pm 1 \; \si{\hertz}
 \begin{align*}
 R_B &= 67.5 \pm 0.6 \; \si{\ohm}\\
 C_B &= 0.2 \pm 10\% \; \si{\micro\F}\\
-f_{\rm TB} &= \frac{1}{2 \pi R_B C_B} = 12 \pm 1 \; \si{\kilo\hertz}
+f_{\rm TB} &= \frac{1}{2 \pi R_B C_B} = 11 \pm 1 \; \si{\kilo\hertz}
 \end{align*}
-I due circuiti non sono indipendenti, quando questi vengono collegati in cascata i condensatori si trovano in parallelo, dunque possiamo definire una capacità efficace per il circuito A+B
+I due circuiti non sono indipendenti quando questi vengono collegati in cascata, poiché $R_B << R_A$ la caduta di tensione ai capi di $R_B$ risulta trascurabile, perciò i condensatori si trovano approssimativamente in parallelo: per tenerne conto possiamo definire una capacità efficace per il circuito A+B
 \begin{align*}
 C_{\rm eff} &= C_A + C_B = 2.4 \pm 10\% \; \si{\micro\F}\\
 f_{\rm TA} &= \frac{1}{2 \pi R_A C_{\rm eff}} = 10 \pm 1 \; \si{\hertz}
 \end{align*}
-Lo schema dei circuiti RC dell'integratore A e del derivatore B:
+Ma essendo $C_B << C_A$ le frequenze di taglio risultano compatibili e gli effetti dovuti al collegamento si possono effettivamente considerare trascurabili, per cui supponiamo che A e B agiscano indipendentemente sui segnali.\\
+Riportiamo lo schema dei circuiti RC dell'integratore A e del derivatore B:
 \begin{center}
 \begin{circuitikz}
 \draw (0,0)
@@ -108,7 +109,7 @@ Lo schema dei circuiti RC dell'integratore A e del derivatore B:
 \node at (1.5,1) [label=\large B] {};
 \end{circuitikz}
 \end{center}
-Lo schema circuitale dell'intero apparato strumentale: integratore e derivatore in cascata da cui i segnali in uscita sono campionati dalla porta analogica \texttt{A0} di Arduino e monitorate dai canali di un oscilloscopio.
+E lo schema circuitale dell'intero apparato strumentale: integratore e derivatore in cascata da cui i segnali in uscita sono campionati dalla porta analogica \texttt{A0} di Arduino e monitorate dai canali di un oscilloscopio.
 \begin{center}
 \begin{circuitikz}[scale = 0.1]
 \draw (-90,0)
@@ -173,7 +174,10 @@ Lo schema circuitale dell'intero apparato strumentale: integratore e derivatore 
 \end{center}
 \section{Ricostruzione di forme d'onda}
 \subsection{Onda quadra}
-Si è implementata in Python l'espressione dell'onda:
+Si è implementata in Python l'espressione dell'onda prevista dall'espansione in serie:
+\begin{equation}\label{eq:sqw}
+f(t) = \frac{f_0}{2} + \sum_{k=1}^{\lambda} c_k \sin{(\omega_kt)} = \frac{f_0}{2} + \sum_{k=0}^{\lambda -1} \frac{2}{(2k+1)\pi} \sin{\left((2k+1)\omega t\right)}
+\end{equation}
 \lstinputlisting[language=Python, firstline=52, lastline=60]{../sft.py}
 Si può dimostrare che tutte le funzioni periodiche, che presentano discontinuità di primo tipo o "a scalino", una volta sviluppate tramite la serie di Fourier troncata ad un numero finito $\lambda$ di termini, presentano delle "sovraelongazioni" intorno ai punti di discontinuità, dove la somma parziale assume valori superiori alla funzione ricostruita. Questo è noto in letteratura come Fenomeno di Gibbs\cite{gibbs}, da cui sappiamo che, anche nel limite in cui $\lambda \longrightarrow \infty$ la sovraelongazione della serie tende ad una quantità finita, ovvero è riducibile ma ultimamente ineliminabile. Nella nostra ricostruzione dunque valutiamo il numero di termini necessari per evitare errori sistematici introdotti da queste discontuinità studiando la differenza fra i valori dell'onda modello e di quella sviluppata con Fourier, come sempre facendo riferimento alla somma dei residui quadrati come indicatore della qualità di riproduzione.
 \begin{figure}[!htb]
@@ -201,7 +205,10 @@ B &= 166.81 \pm 0.05 \; \rm digit \\
 \end{align*}
 \fi
 \subsection{Onda triangolare}
-Si è implementata in Python l'espressione dell'onda: 
+Si è implementata in Python l'espressione dell'onda prevista dallo sviluppo in serie di Fourier:
+\begin{equation}
+g(t)= \frac{g_0}{2} + \sum_{k=1}^{\lambda} b_k \cos{(\omega_kt)} = \frac{g_0}{2} + \sum_{k=0}^{\lambda-1} \left(\frac{2}{(2k+1)\pi}\right)^2 \cos{\left((2k+1)\omega t\right)}
+\end{equation} 
 \lstinputlisting[language=Python, firstline=62, lastline=70]{../sft.py}
 Da uno studio sulla qualità della forma d'onda analogo al caso precedente, dalla figura \ref{plt:trg} si nota subito come il numero di termini necessari perché i residui quadrati dell'onda siano inferiori all'unità si ha già per $\lambda \leq 1000$, due ordini di grandezza in meno rispetto a prima. Questo è un ovvia conseguenza del fatto che, l'onda triangolare non è affetta dal fenomeno di Gibbs, in quanto priva di punti di discontinuità a salto.
 \begin{figure}[!htb]
@@ -233,9 +240,16 @@ B &= 69.8 \pm 0.9 \; \rm mV \\
 \end{figure}
 \fi
 \subsection{Onda a pinna di squalo}
-Si è implementata in Python l'espressione dell'onda:
+Si è implementata in Python l'espressione dell'onda, applicando la $T(\omega)$ ad ogni armonica nella serie dell'onda quadra \eqref{eq:sqw} secondo quanto previsto dal metodo dei fasori per un'onda sinusoidale in uscita da un integratore RC:
+\begin{align}\label{eq:fin}
+\begin{cases}
+\mathrm{Attenuazione} \; A_A(\omega_k) &=  \frac{1}{\sqrt{1 + \left(\omega_k/\omega_{\rm T_A} \right)^2}} \\
+\mathrm{Sfasamento} \; \Delta \phi_A(\omega_k) &= \arctan{\left(- \omega_k /\omega_{\rm T_A}\right)} 
+\end{cases}
+\end{align}
 \lstinputlisting[language=Python, firstline=72, lastline=84]{../sft.py}
-Dunque per confrontare i risultati della simulazione con quanto osservato sperimentalmente otteniamo i parametri ottimali dell'onda da un fit per la "pinna di squalo" sugli stessi dati a cui verrà sovrapposta:\\
+Dunque si sono acquisite le forme d'onda in uscita dal nostro circuito A, con sampling rate stabilito dallo sketch di Arduino, regolato in modo da campionare a intervalli di durata nominale $\Delta t = 100 \; \si{\micro\second} \implies$ corrispondente ad un rate di campionamento $f_s = 10 \; \mathrm{kSa/s}$.
+Per confrontare i risultati della simulazione con quanto osservato sperimentalmente otteniamo i parametri ottimali dell'onda da un fit per la "pinna di squalo" sugli stessi dati a cui verrà sovrapposta:\\
 \begin{align*}
 f &= 50.219 \pm 0.005 \; \rm Hz \\
 A &= 727.8 \pm 0.7 \; \rm digit \\
@@ -250,12 +264,13 @@ B &= 159.11 \pm 0.07 \; \rm digit \\
 \chi^2 &= 2339/881 \\
 \text{abs\_sigma} &= \rm True
 \end{align*}
+Riportiamo quindi il risultato della "simulazione" in figura \ref{plt:ardfin}. Si noti inoltre come questi valori fungano, nel resto del testo, da parametri di riferimento per ogni altra ricostruzione d'onda, come già visto in \ref{plt:sqw} e in seguito per la figura \ref{plt:cas}.\\
 \begin{figure}[!htb]
 	\centering 
  		\scalebox{0.9}{\input{./ardfin.pgf}}
  	\caption{Sovrapposizione dei campionamenti di Arduino con la ricostruzione della pinna di squalo \label{plt:ardfin}}
 \end{figure}
-Cambiando i parametri a piacere, ma fissando lo stesso intervallo nei tempi, dalla figura \ref{plt:fins} si vede come la pinna di squalo ricostruita con il metodo simbolico continui a descrivere -bene- i dati sperimentali:
+Cambiando i parametri a piacere, ma fissando lo stesso intervallo nei tempi, dalla figura \ref{plt:fins} si vede come la pinna di squalo ricostruita con il metodo simbolico continui a descrivere -bene- i dati sperimentali. Per averne una descrizione più quantitativa, operando di nuovo un \emph{fit} per i parametri ottimali dei segnali si trova:
 \begin{align*}
 f &= 69.626 \pm 0.008 \; \rm Hz  \qquad &f &= 169.958 \pm 0.009 \; \rm Hz \\
 A &= 591.7 \pm 1.0 \; \rm digit \qquad &A &= 289.9 \pm 0.3 \; \rm digit \\
@@ -270,7 +285,13 @@ B &= 212.17 \pm 0.07 \; \rm digit \qquad &B &= 179.29 \pm 0.13 \; \rm digit \\
 \end{figure}
 Si noti come i punti considerati "outliers", a più di 2.5 barre d'errore di distanza dal modello, si dispongano sempre alla stessa altezza nell'onda, come lungo una retta costante: in effetti su ogni periodo i punti attorno al valore $255 = 2^8 -1$ assumono andamento "a scalino" a seguito della digitalizzazione di Arduino. Questo si deve al difetto caratteristico degli ADC, per cui il sistema mostra una qualche "riluttanza" a far scattare il bit successivo (i.e. il nono) nella lettura della tensione. Dunque il test del $\chi^2$ potrà essere indice della bontà del fit solo una volta operata la rimozione di questi punti e altri (ove necessario) che si devono ad artefatti introdotti dal sistema di campionamento.
 \subsection{Serie di derivatore e integratore}
-Supponiamo trascurabili sia gli effetti delle resistenze interne dei componenti sia quelli di mismatch tra i sottocircuiti A e B collegati in cascata. Dal metodo simbolico sappiamo che gli effetti sulle armoniche in uscita da A andranno ad aggiungersi a quelli dovuti al derivatore B, per cui in uscita ci aspettiamo un'espressione del tipo:
+Supponiamo trascurabili sia gli effetti delle resistenze interne dei componenti sia quelli di mismatch tra i sottocircuiti A e B collegati in cascata, per cui secondo quanto previsto dal metodo simbolico si aggiungono, all'espressione dell'onda in uscita da A \eqref{eq:fin}, le trasformazioni delle armoniche dovute al derivatore B:
+\begin{align}
+\begin{cases}
+\mathrm{Attenuazione} \; A_B(\omega_k) &=  \frac{1}{\sqrt{1 + \left(\omega_{\rm T_B}/\omega_k \right)^2}} \\
+\mathrm{Sfasamento} \; \Delta \phi_B(\omega_k) &= \arctan{\left(\omega_{\rm T_B} /\omega_k \right)} 
+\end{cases}
+\end{align}
 \lstinputlisting[language=Python, firstline=86, lastline=98]{../sft.py}
 \begin{figure}[!htb]
 	\scalebox{0.55}{\input{./cas50.pgf}}\hfill \scalebox{0.55}{\input{./cas200.pgf}}
@@ -301,13 +322,13 @@ T &= 21.9877 \pm 0.0006 \; \rm ms \\
 \end{figure}
 \fi
 \subsection{Accoppiamento AC dell'oscilloscopio}
-L’accoppiamento AC in ingresso all’oscilloscopio taglia la componente continua del segnale visualizzato mediante un condensatore di capacità $C_{\rm AC}$ in serie al segnale che, una volta carico, impedisce il passaggio di corrente. Assieme alla resistenza di ingresso dell’oscilloscopio (nel nostro caso $R_{\rm osc} = 1 \si{\mega\ohm}$ nominale\footnote{In realtà lo stadio di ingresso dell’oscilloscopio prevede il parallelo tra $R_{\rm osc}$ e un piccolo condensatore $C_{\rm osc} = 20 pF$ nominali per modellare capacità parassite dovute ai connettori e ai circuiti interni allo strumento. Dunque lo stadio di ingresso ha una impedenza di ingresso data da $Z_{\rm osc}= R_{\rm osc} + \frac{1}{j \omega C_{\rm osc}} $. I moduli delle impedenze dei due componenti in parallelo diventano comparabili per $\omega = 5 \times 10^4 \si{\radian\per\s}$. Perciò trascurare la presenza del condensatore $C_{\rm osc}$ è, a rigore, giustificato fintanto che la frequenza di lavoro è $f << 300 \; \si{\kilo\hertz}$}) tra segnale e linea di terra, il condensatore realizza un circuito derivatore RC/HPF. Di conseguenza in accoppiamento AC  forme d’onda quadre a bassa frequenza $\sim f_T = (2\pi R_{\rm osc}C_{\rm AC})^{-1}$, assumono la forma caratteristica dell'esponenziale di carica/scarica del condensatore. Dalle specifiche tecniche sappiamo che in AC l'oscilloscopio attenua le componenti del segnale sotto i $10$ Hz, per cui ci si aspetta $C_{\rm AC} \approx 4 \; \si{\nano\F}$. Questa distorsione può essere ricostruita con lo stesso metodo simbolico applicando attenuazione e sfasamento a un'onda quadra scritta in armoniche di Fourier. Nella figura \ref{plt:DSOAC} si simula la visualizzazione all’oscilloscopio di un’onda quadra di frequenza $f = 40$ Hz sottoposta all’azione di un filtro passa-alto con $f_T = 10$ Hz. 
+L’accoppiamento AC in ingresso all’oscilloscopio taglia la componente continua del segnale visualizzato mediante un condensatore di capacità $C_{\rm AC}$ in serie al segnale che, una volta carico, impedisce il passaggio di corrente. Assieme alla resistenza di ingresso dell’oscilloscopio (nel nostro caso $R_{\rm osc} = 1 \si{\mega\ohm}$ nominale\footnote{In realtà lo stadio di ingresso dell’oscilloscopio prevede il parallelo tra $R_{\rm osc}$ e un piccolo condensatore $C_{\rm osc} = 20 pF$ nominali per modellare capacità parassite dovute ai connettori e ai circuiti interni allo strumento. Dunque lo stadio di ingresso ha una impedenza di ingresso data da $Z_{\rm osc}= R_{\rm osc} + \frac{1}{j \omega C_{\rm osc}} $. I moduli delle impedenze dei due componenti in parallelo diventano comparabili per $\omega = 5 \times 10^4 \si{\radian\per\s}$. Perciò trascurare la presenza del condensatore $C_{\rm osc}$ è, a rigore, giustificato fintanto che la frequenza di lavoro è $f << 300 \; \si{\kilo\hertz}$}) tra segnale e linea di terra, il condensatore realizza un circuito derivatore RC/HPF. Di conseguenza, in accoppiamento AC,  forme d’onda quadre a bassa frequenza $\sim f_T = (2\pi R_{\rm osc}C_{\rm AC})^{-1}$ assumono la forma caratteristica dell'esponenziale di carica/scarica del condensatore. Dalle specifiche tecniche sappiamo che in AC l'oscilloscopio attenua le componenti del segnale sotto i $10$ Hz, per cui ci si aspetta $C_{\rm AC} \approx 4 \; \si{\nano\F}$. Si è ricostruita questa distorsione con lo stesso metodo simbolico applicando attenuazione e sfasamento a un'onda quadra scritta in armoniche di Fourier, dunque si confronta quanto previsto con il campionamento dell'onda eseguito dall'oscilloscopio digitale stesso che opera la distorsione. Come prima si ottengono i parametri di best \emph{fit} per la forma d'onda mediante la stessa routine di minimizzazione del $\chi^2$, stavolta però imponendo $\rm{abs\_sigma} = \rm False$, in quanto non è altrettanto nota la natura della fonte principale di errore sulle misure. Nella figura \ref{plt:DSOAC} si vede la sovrapposizione e simulazione di campionamento all’oscilloscopio, con rate di campionamento $f_s = 0.1 \mathrm{MSa/s}$, di un’onda quadra di frequenza $f = 40$ Hz sottoposta all’azione di un filtro passa-alto con $f_T = 10$ Hz. 
 \begin{figure}[!htb]
 	\centering 
  		\includegraphics[scale=0.9]{./DSOAC.pdf}
  	\caption{Fit dell'onda quadra distorta in accoppiamento AC da campionamento con oscilloscopio digitale\label{plt:DSOAC}}
 \end{figure}
-Dunque ripetendo lo stesso fit una volta rimossi gli outlier a più di 4 barre d'errore di distanza nelle zone più spigolose del modello si ottiene un test del $\chi^2$ ragionevole \ref{plt:AC_out}
+Dunque ripetendo lo stesso fit una volta rimossi gli outlier a più di 4 barre d'errore di distanza nelle zone più spigolose del modello si ottiene un test del $\chi^2$ ragionevole, come illustrato in figura \ref{plt:AC_out}
 \begin{align*}
 f &= 40.647 \pm 0.003 \; \rm Hz \\
 A &= 3.62 \pm 0.05 \; \rm V \\
@@ -342,8 +363,8 @@ sulle onde quadre ricostruite numericamente per 400 valori della frequenza di
 lavoro $f$: Supponendo un'ampiezza picco-picco unitaria in ingresso, si è
 dedotta l'ampiezza in uscita come differenza tra valore massimo e minimo della serie.
 Dalla figura \ref{plt:gain} si vede come il comportamento sperimentale sia
-diverso dalle previsioni per il caso sinusoidale (linea tratteggiata grigia)
-e anche come esso sia, almeno per frequenze entro i $10^4$ Hz,
+diverso dalle previsioni per un segnale sinusoidale (linea tratteggiata grigia)
+e anche come esso sia, almeno per frequenze entro i $10 \; \si{\kilo\hertz}$,
 qualitativamente ben riprodotto dalla simulazione.
 Si vede anche come, per frequenze più alte, i punti si discostano dall'
 andamento atteso, a causa di capacità parassite che cessano di essere
@@ -356,7 +377,7 @@ dunque la simulazione.
 \end{figure}
 \subsection*{Nota sul metodo di fit}
 Per determinare i parametri ottimali e le rispettive varianze si \`e implementato un metodo di fit basato sui minimi quadrati mediante la funzione \emph{curve\_fit} di Python.
-Per tutti i \emph{fit} con campionamenti digitali di Arduino si è imposto $\rm{abs\_sigma} = \rm True$ in quanto come incertezza si prende il valore convenzionale $\sigma = \pm 1$ [digit], per cui effettivamente si sta eseguendo un fit dei minimi quadrati.\\
+Per tutti i \emph{fit} con campionamenti digitali di Arduino si è imposto $\rm{abs\_sigma} = \rm True$ in quanto come incertezza si è assunto il valore convenzionale $\sigma = \pm 1$ [digit], per cui effettivamente si esegue un fit dei minimi quadrati.\\
 \medskip
 \bibliographystyle{IEEEtrandoi}
 \bibliography{refs}

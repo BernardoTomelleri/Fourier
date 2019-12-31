@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.26)  28 DEC 2019 23:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.26)  31 DEC 2019 01:05
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1908,7 +1908,11 @@ Package microtype Warning: Unknown slot number of character
 \realshift=\dimen350
 \realshift=\dimen351
 \realshift=\dimen352
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 111.
+[1
+
+{c:/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 112.
+
 
 (c:/texlive/2019/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1917,115 +1921,109 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [1
-
-{c:/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 \realshift=\dimen353
 \realshift=\dimen354
 \realshift=\dimen355
 \realshift=\dimen356
 \realshift=\dimen357
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 171.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 172.
 
 (c:/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/02/27 1.8b listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 177.
+nput line 181.
  (../sft.py
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 52.
 )
 (./figs/./sqw100.pgf) (./figs/./sqw1k.pgf) (./figs/./sqw10k.pgf)
 (./figs/./sqw100k.pgf)
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 180--183
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 184--187
 [][] []
  []
 
 
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 180--183
-[] [] 
- []
-
-(../sft.py) (./figs/./trg10.pgf) (./figs/./trg50.pgf) (./figs/./trg100.pgf)
-(./figs/./trg1k.pgf)
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 208--210
-[][] []
- []
-
-
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 208--210
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 184--187
 [] [] 
  []
 
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/9'.
 (microtype)             Ignoring protrusion settings for this character.
-[2] (../sft.py)
-Underfull \hbox (badness 10000) in paragraph at lines 238--239
-
- []
-
-[3] (./figs/./ardfin.pgf) [4] (./figs/./ardfin70.pgf) (./figs/./ardfin170.pgf)
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 268--269
-[][] [] 
- []
-
-[5] (../sft.py) (./figs/./cas50.pgf) (./figs/./cas200.pgf) (./figs/./cas2k.pgf)
-(./figs/./cas20k.pgf)
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 276--278
+[2] (../sft.py) (./figs/./trg10.pgf) (./figs/./trg50.pgf) (./figs/./trg100.pgf)
+(./figs/./trg1k.pgf)
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 215--217
 [][] []
  []
 
 
-Overfull \hbox (25.08624pt too wide) in paragraph at lines 276--278
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 215--217
+[] [] 
+ []
+
+[3] (../sft.py)
+Underfull \hbox (badness 10000) in paragraph at lines 251--253
+
+ []
+
+[4] (./figs/./ardfin.pgf) [5] (./figs/./ardfin70.pgf) (./figs/./ardfin170.pgf)
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 283--284
+[][] [] 
+ []
+
+(../sft.py [6]) (./figs/./cas50.pgf) (./figs/./cas200.pgf) (./figs/./cas2k.pgf)
+(./figs/./cas20k.pgf)
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 297--299
+[][] []
+ []
+
+
+Overfull \hbox (25.08624pt too wide) in paragraph at lines 297--299
 [] [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 280--303
+Underfull \hbox (badness 10000) in paragraph at lines 301--324
 
  []
 
-<./figs/./DSOAC.pdf, id=129, 462.52798pt x 346.89601pt>
+<./figs/./DSOAC.pdf, id=158, 462.52798pt x 346.89601pt>
 File: ./figs/./DSOAC.pdf Graphic file (type pdf)
 <use ./figs/./DSOAC.pdf>
-Package pdftex.def Info: ./figs/./DSOAC.pdf  used on input line 307.
+Package pdftex.def Info: ./figs/./DSOAC.pdf  used on input line 328.
 (pdftex.def)             Requested size: 416.27133pt x 312.20352pt.
-[6]
-<./figs/./AC_out.pdf, id=155, 462.52798pt x 346.89601pt>
+[7]
+<./figs/./AC_out.pdf, id=171, 462.52798pt x 346.89601pt>
 File: ./figs/./AC_out.pdf Graphic file (type pdf)
 <use ./figs/./AC_out.pdf>
-Package pdftex.def Info: ./figs/./AC_out.pdf  used on input line 330.
+Package pdftex.def Info: ./figs/./AC_out.pdf  used on input line 351.
 (pdftex.def)             Requested size: 416.27133pt x 312.20352pt.
- (./figs/./gain5+.pgf) [7] [8 <./figs/./DSOAC.pdf> <./figs/./AC_out.pdf
-
-pdfTeX warning: pdflatex.exe (file ./figs/./AC_out.pdf): PDF inclusion: multipl
-e pdfs with page group included in a single page
->] (./sft.bbl [9]) [10]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 363.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 363.
+ (./figs/./gain5+.pgf) [8 <./figs/./DSOAC.pdf>] (./sft.bbl [9 <./figs/./AC_out.
+pdf>]) [10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 384.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 384.
  (./sft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 363.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 363.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 384.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 384.
 Package rerunfilecheck Info: File `sft.out' has not changed.
 (rerunfilecheck)             Checksum: A3CE25CCB15761BF03F1C5F9D013C3FF;588.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 363.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 384.
  ) 
 Here is how much of TeX's memory you used:
- 62898 strings out of 492609
- 1488404 string characters out of 6132817
- 6487107 words of memory out of 7999999
- 65689 multiletter control sequences out of 15000+600000
- 741634 words of font info for 276 fonts, out of 8000000 for 9000
+ 62908 strings out of 492609
+ 1488538 string characters out of 6132817
+ 6379617 words of memory out of 7999999
+ 65695 multiletter control sequences out of 15000+600000
+ 741681 words of font info for 276 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 73i,23n,127p,1889b,1311s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 73i,23n,127p,2386b,2318s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/texlive/2019/tex
 mf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2019/texmf-dist/fonts/enc/
-dvips/lm/lm-mathex.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
-}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/texlive/2019/
-texmf-dist/fonts/enc/dvips/base/8r.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dv
+dvips/lm/lm-ec.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}{c:/
+texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/texlive/2019/texmf
+-dist/fonts/enc/dvips/lm/lm-mathex.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dv
 ips/lm/lm-ts1.enc}<c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 mi10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
 c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/
@@ -2050,10 +2048,10 @@ fb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/texlive/2019
 ype1/public/lm/lmsy9.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtk
 10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/texlive
 /2019/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on sft.pdf (10 pages, 1363810 bytes).
+Output written on sft.pdf (10 pages, 1374145 bytes).
 PDF statistics:
- 357 PDF objects out of 1000 (max. 8388607)
- 292 compressed objects within 3 object streams
- 77 named destinations out of 1000 (max. 500000)
+ 369 PDF objects out of 1000 (max. 8388607)
+ 303 compressed objects within 4 object streams
+ 81 named destinations out of 1000 (max. 500000)
  75351 words of extra memory for PDF output out of 89155 (max. 10000000)
 
