@@ -369,7 +369,18 @@ qualitativamente ben riprodotto dalla simulazione.
 Si vede anche come, per frequenze più alte, i punti si discostano dall'
 andamento atteso, a causa di capacità parassite che cessano di essere
 trascurabili, al contrario di quanto presuppone il nostro modello,
-dunque la simulazione.
+dunque la simulazione. Per poterne modellare gli effetti si potrebbero,
+ad esempio, considerare dei condensatori in parallelo alla resistenza\footnote{
+In effetti i capi della resistenza, come qualsiasi altri due
+conduttori percorsi da corrente e vicini tra loro formano dei condensatori,
+di capacità tipicamente nell'ordine della decina di $\si{\pico\F}$, i cui
+effetti risultano apprezzabili solo per frequenze superiori alle migliaia
+di Hz. Per raffinare ulteriormente il modello si potrebbero anche considerare
+le resistenze in parallelo ai condensatori, per tenere conto delle "perdite"
+di carica che si determinano nel dielettrico reale al loro interno.}
+$R_A$ che, formando una maglia impropria aggiungerebbero uno zero alla risposta
+in frequenza del circuito, che ora assumerebbe un andamento più vicino a
+quello delle misure ad alte frequenze.
 \begin{figure}[!htb]
 	\centering 
  		\scalebox{0.9}{\input{./gain5+.pgf}}
@@ -378,12 +389,7 @@ dunque la simulazione.
 \subsection*{Nota sul metodo di fit}
 Per determinare i parametri ottimali e le rispettive varianze si \`e implementato un metodo di fit basato sui minimi quadrati mediante la funzione \emph{curve\_fit} di Python.
 Per tutti i \emph{fit} con campionamenti digitali di Arduino si è imposto $\rm{abs\_sigma} = \rm True$ in quanto come incertezza si è assunto il valore convenzionale $\sigma = \pm 1$ [digit], per cui effettivamente si esegue un fit dei minimi quadrati.\\
-\medskip
+\pagebreak
 \bibliographystyle{IEEEtrandoi}
 \bibliography{refs}
 \end{document}
-%\begin{figure}[!htb]
-%	\centering 
-% 		\includegraphics[scale=0.9]{./figs/dist.pdf}
-% 	\caption{Distribuzione delle • per $• = • \pm • \rm •$ \label{dist:5V}}
-%\end{figure}
